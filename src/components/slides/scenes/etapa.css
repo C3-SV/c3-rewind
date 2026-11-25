@@ -1,0 +1,99 @@
+/* ===== ETAPA — el símbolo se parte en tres líneas =====
+   Start: the symbol where the previous slide's orbit field sits (pose gracias: 80% / 52%, 44cqw).
+   Then each node leaves along an arc (comet trail) and lands as the identity of its line: ring + wordmark. */
+.sc-etapa { --et-x: 4.4em; overflow: clip; }
+.sc-etapa .et-col--compite { --ac: var(--compite-l); --nc: var(--compite-l); }
+.sc-etapa .et-col--crea { --ac: var(--crea); --nc: var(--crea); }
+.sc-etapa .et-col--conecta { --ac: var(--conecta-l); --nc: var(--conecta-l); }
+.sc-etapa .et-fly--compite { --nc: var(--compite-l); } .sc-etapa .et-fly--crea { --nc: var(--crea); } .sc-etapa .et-fly--conecta { --nc: var(--conecta-l); }
+
+/* ---------- the symbol (ghost once the nodes have left) ---------- */
+.sc-etapa .et-sym { position: absolute; left: 80%; top: 52%; width: 44em; aspect-ratio: 1; translate: -50% -50%; opacity: .26; scale: 1.05; pointer-events: none; }
+.is-active .sc-etapa .et-sym { animation: et-sym-fade 2.4s var(--ease) 1.5s backwards; }
+@keyframes et-sym-fade { from { opacity: .9; scale: 1; } }
+.sc-etapa .et-sym svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.sc-etapa .et-oline { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sc-etapa .et-odots { fill: none; stroke: rgba(255,255,255,.34); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1.2 18.43; stroke-linecap: round; }
+.sc-etapa .et-ring { fill: none; stroke: rgba(255,255,255,.2); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sc-etapa .et-turn { transform-origin: 200px 200px; transform: rotate(calc(var(--rot, 0) * 1deg)); }
+.is-active .sc-etapa .et-turn { animation: et-spin 140s linear 1.5s infinite backwards; }
+.is-active .sc-etapa .et-turn--rev { animation-duration: 220s; animation-direction: reverse; }
+@keyframes et-spin { from { transform: rotate(calc(var(--rot, 0) * 1deg)); } to { transform: rotate(calc(var(--rot, 0) * 1deg + 360deg)); } }
+.sc-etapa .et-nodes { transform-origin: 200px 200px; transform: rotate(calc(var(--rot, 0) * 1deg)); }
+.sc-etapa .et-halo { fill: #0f203e; }
+.sc-etapa .et-sn-c--compite { fill: var(--compite-l); } .sc-etapa .et-sn-c--crea { fill: var(--crea); } .sc-etapa .et-sn-c--conecta { fill: var(--conecta-l); }
+/* nodes only exist in the symbol until their departure; afterwards they live in their column */
+.sc-etapa .et-sn { opacity: 0; }
+.is-active .sc-etapa .et-sn { animation: et-hold var(--t0) linear backwards; }
+@keyframes et-hold { from, to { opacity: 1; } }
+
+/* ---------- travelling nodes ---------- */
+.sc-etapa .et-flights { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.sc-etapa .et-fly, .sc-etapa .et-fx, .sc-etapa .et-fy { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.sc-etapa .et-fd { position: absolute; left: 0; top: 0; display: block; width: calc(var(--dia, 2.9em) * (1 - var(--j, 0) * .15)); aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--nc); opacity: 0; --o: calc(.95 - var(--j, 0) * .17); box-shadow: 0 0 1.4em color-mix(in srgb, var(--nc) 65%, transparent); }
+.is-active .sc-etapa .et-fx { animation: et-x var(--dur) cubic-bezier(.5,.02,.2,1) calc(var(--t0) + var(--j) * .06s) backwards; }
+.is-active .sc-etapa .et-fy { animation: et-y var(--dur) linear calc(var(--t0) + var(--j) * .06s) backwards; }
+.is-active .sc-etapa .et-fd { animation: et-vis var(--dur) linear calc(var(--t0) + var(--j) * .06s) backwards, et-grow var(--dur) var(--ease) calc(var(--t0) + var(--j) * .06s) backwards; }
+@keyframes et-x { from { translate: var(--x0, 0px) 0; } to { translate: var(--x1, 0px) 0; } }
+@keyframes et-y {
+  0% { translate: 0 var(--y0, 0px); animation-timing-function: cubic-bezier(.25,.1,.3,1); }
+  48% { translate: 0 calc((var(--y0, 0px) + var(--y1, 0px)) / 2 - var(--lift, 0) * 1em); animation-timing-function: cubic-bezier(.45,0,.25,1); }
+  100% { translate: 0 var(--y1, 0px); }
+}
+@keyframes et-vis { 0% { opacity: 0; } 5% { opacity: var(--o); } 95% { opacity: var(--o); } 100% { opacity: 0; } }
+@keyframes et-grow { from { scale: 1; } to { scale: var(--k, 1.3); } }
+
+/* ---------- headline ---------- */
+.sc-etapa .et-head { position: absolute; left: var(--et-x); top: 6.4em; width: 62em; z-index: 2; }
+.sc-etapa .et-title { font: 800 5.5em/1.02 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.03em; color: #fff; }
+.sc-etapa .et-intro { font: 400 1.5em/1.5 var(--font-poppins, Poppins), sans-serif; color: #dfe7f3; margin-top: .9em; max-width: 30em; }
+.sc-etapa .et-tail { position: absolute; z-index: 2; right: var(--et-x); top: 9.4em; width: 30em; }
+.sc-etapa .et-outro { font: 700 2.3em/1.25 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.02em; color: #fff; }
+.sc-etapa .et-outro__tick { display: block; width: 1.5em; height: .09em; margin-bottom: .55em; background: var(--crea); border-radius: 9em; }
+
+/* ---------- the three lines ---------- */
+.sc-etapa .et-cols { position: absolute; left: var(--et-x); right: var(--et-x); top: 24em; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 3.4em; z-index: 2; }
+.sc-etapa .et-col { position: relative; display: flex; flex-direction: column; align-items: flex-start; text-align: left; color: #fff; border-radius: 1.2em; transition: opacity .45s ease; }
+.sc-etapa .et-cols:hover .et-col:not(:hover), .sc-etapa .et-cols:focus-within .et-col:not(:focus-visible) { opacity: .4; }
+.sc-etapa .et-col:focus-visible { outline-offset: .6em; }
+.sc-etapa .et-id { position: relative; flex: none; width: 8.4em; height: 8.4em; transition: transform .8s var(--out); }
+.sc-etapa .et-col:hover .et-id, .sc-etapa .et-col:focus-visible .et-id { transform: scale(1.14) rotate(-16deg); }
+.sc-etapa .et-ringc { position: absolute; inset: .4em; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--ac) 62%, transparent); transform-origin: 6.79em 1.46em; transition: border-color .5s; -webkit-mask: radial-gradient(circle 2.4em at 6.79em 1.46em, transparent 98%, #000 100%); mask: radial-gradient(circle 2.4em at 6.79em 1.46em, transparent 98%, #000 100%); }
+.sc-etapa .et-col:hover .et-ringc, .sc-etapa .et-col:focus-visible .et-ringc { border-color: var(--ac); }
+.sc-etapa .et-en { position: absolute; left: 7.19em; top: 1.86em; width: 3.2em; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--nc); box-shadow: 0 0 1.8em color-mix(in srgb, var(--nc) 55%, transparent); }
+.is-active .sc-etapa .et-en { animation: et-land 1s var(--spring) var(--arr) backwards; }
+.is-active .sc-etapa .et-ringc { animation: et-ring-in 1.3s var(--out) var(--arr) backwards; }
+@keyframes et-land { from { opacity: 0; scale: .55; } }
+@keyframes et-ring-in { from { opacity: 0; transform: scale(.12); } }
+.sc-etapa .et-name { display: block; margin-top: .5em; font: 800 5.6em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.035em; color: var(--ac); transition: translate .6s var(--out); }
+.sc-etapa .et-name .ln { padding-bottom: .16em; margin-bottom: -.16em; }
+.sc-etapa .et-col:hover .et-name, .sc-etapa .et-col:focus-visible .et-name { translate: .12em 0; }
+.sc-etapa .et-def { display: block; font: 400 1.4em/1.45 var(--font-poppins, Poppins), sans-serif; color: #e3eaf5; margin-top: .75em; max-width: 19em; }
+.sc-etapa .et-go { display: inline-flex; align-items: center; gap: .5em; margin-top: 1.1em; font: 700 max(10px, .85em)/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--soft); transition: color .3s, gap .4s var(--out); }
+.sc-etapa .et-col:hover .et-go, .sc-etapa .et-col:focus-visible .et-go { color: #fff; gap: .95em; }
+.sc-etapa .et-go .ic { width: 1.4em; height: 1.4em; }
+/* the orbit between identities: a dotted rail from ring to ring */
+.sc-etapa .et-col:not(:last-child)::after { content: ""; position: absolute; top: 4.1em; left: 8.3em; width: calc(100% - 4.5em); height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 2px, transparent 2px 12px); pointer-events: none; }
+.is-active .sc-etapa .et-col:not(:last-child)::after { animation: rw-wipe 1.2s var(--ease) calc(var(--arr) + .55s) backwards; }
+
+/* ---------- portrait: three stacked sections, nodes descend along a drawn path ---------- */
+@container rw (max-aspect-ratio: 1/1) {
+  .sc-etapa { --et-x: 3.2em; }
+  .sc-etapa .et-sym { left: 74%; top: 17em; width: 36em; }
+  .sc-etapa .et-head { top: 5.6em; width: 31em; }
+  .sc-etapa .et-title { font-size: 3.35em; }
+  .sc-etapa .et-intro { font-size: 1.12em; margin-top: .8em; max-width: 24em; }
+  .sc-etapa .et-tail { right: auto; left: var(--et-x); width: 30em; top: auto; bottom: 7.9em; }
+  .sc-etapa .et-outro { font-size: 1.45em; }
+  .sc-etapa .et-outro__tick { display: none; }
+  .sc-etapa .et-cols { top: clamp(22em, 33cqh, 30em); display: flex; flex-direction: column; gap: var(--g); --g: clamp(2em, 4.4cqh, 4.6em); }
+  .sc-etapa .et-col { display: grid; grid-template-columns: 6.2em 1fr; grid-template-rows: auto auto auto; column-gap: 1.3em; width: 100%; }
+  .sc-etapa .et-id { grid-row: 1 / span 3; font-size: .74em; margin: 0; transform-origin: 0 0; }
+  .sc-etapa .et-col:hover .et-id, .sc-etapa .et-col:focus-visible .et-id { transform: none; }
+  .sc-etapa .et-name { font-size: 3.5em; margin-top: -.05em; grid-column: 2; }
+  .sc-etapa .et-def { font-size: 1.08em; margin-top: .55em; max-width: 20em; grid-column: 2; }
+  .sc-etapa .et-go { margin-top: .75em; grid-column: 2; }
+  .sc-etapa .et-col:not(:last-child)::after { top: 6.6em; left: 3.05em; width: 2px; height: calc(100% + var(--g) - 6.9em); background: repeating-linear-gradient(180deg, rgba(255,255,255,.5) 0 2px, transparent 2px 12px); }
+  .is-active .sc-etapa .et-col:not(:last-child)::after { animation-name: et-down; }
+}
+@keyframes et-down { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }

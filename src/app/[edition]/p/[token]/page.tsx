@@ -49,6 +49,7 @@ export default async function PrivateEditionPage({ params }: { params: Promise<P
     <RewindPlayer
       slides={resolveSlides(year, "private")}
       edition={year}
+      photos={edition.photos}
       imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined}
       recipient={presentation}
       pdfHref={`/${year}/p/${token}/pdf`}

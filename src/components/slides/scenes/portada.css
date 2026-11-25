@@ -1,0 +1,93 @@
+/* ===== PORTADA — «El año aterriza» =====
+   Layers: ring typography around the orbit field · light sweep · giant 2026 · film band with node bites. */
+.sc-portada { --pt-x: 4.4em; overflow: clip; }
+
+/* ---------- depth ---------- */
+.sc-portada .pt-depth { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+/* orbit field pose for portada: centre 68% / 50%, 50cqw wide. The ring type wraps it at ~1.17x. */
+.sc-portada .pt-ring { position: absolute; left: 68%; top: 50%; width: 58em; aspect-ratio: 1; translate: -50% -50%; }
+.sc-portada .pt-ringtype { width: 100%; height: 100%; display: block; overflow: visible; }
+.sc-portada .pt-ringtype text { font: 700 2.05px var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .5px; fill: rgba(255,255,255,.26); }
+.sc-portada .pt-rt-hair { fill: none; stroke: rgba(255,255,255,.07); stroke-width: .12; }
+.is-active .sc-portada .pt-ringtype { animation: pt-sway 46s ease-in-out infinite alternate; }
+.sc-portada .pt-glow { position: absolute; left: 30%; top: 14%; width: 34em; aspect-ratio: 1; border-radius: 50%; translate: -50% 0; background: radial-gradient(closest-side, rgba(51,190,172,.22), transparent); opacity: .9; }
+.is-active .sc-portada .pt-glow { animation: pt-breathe 7s ease-in-out infinite, rw-fade 2s ease .6s backwards; }
+.sc-portada .pt-sweep { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+.sc-portada .pt-sweep::before { content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; transform: translateX(-130%) skewX(-18deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.07) 45%, rgba(190,235,255,.16) 52%, transparent); mix-blend-mode: screen; }
+.is-active .sc-portada .pt-sweep { opacity: 1; }
+.is-active .sc-portada .pt-sweep::before { animation: pt-sweep 2.8s var(--ease) .5s backwards; }
+@keyframes pt-sweep { from { transform: translateX(-130%) skewX(-18deg); } to { transform: translateX(380%) skewX(-18deg); } }
+@keyframes pt-sway { from { transform: rotate(-9deg); } to { transform: rotate(11deg); } }
+@keyframes pt-breathe { 50% { transform: scale(1.12); opacity: .6; } }
+
+/* ---------- grid: top bar + hero ---------- */
+.sc-portada .pt-grid { position: absolute; left: 0; right: 0; top: 0; bottom: 17.2em; display: grid; grid-template-rows: auto 1fr; padding: 3em var(--pt-x) 0; z-index: 2; }
+.sc-portada .pt-top { display: flex; align-items: center; gap: 1.4em; min-height: 4.6em; }
+.sc-portada .pt-lockup { height: 4.4em; width: auto; }
+.sc-portada .pt-x { font: 600 1.7em/1 var(--font-montserrat, Montserrat), sans-serif; color: rgba(255,255,255,.5); }
+.sc-portada .pt-co { display: inline-flex; align-items: center; height: 4em; }
+.sc-portada .pt-co--logo { background: #fff; border-radius: 1.2em; padding: .5em 1.3em; }
+.sc-portada .pt-co--logo img { height: 100%; width: auto; max-width: 11em; object-fit: contain; }
+.sc-portada .pt-co--mono { gap: .9em; }
+.sc-portada .pt-co--mono i { width: 4em; height: 4em; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--navy); font: 800 1.45em/1 var(--font-montserrat, Montserrat), sans-serif; font-style: normal; letter-spacing: -.02em; box-shadow: 0 0 0 .22em var(--navy), 0 0 0 .3em rgba(255,255,255,.4); }
+.sc-portada .pt-co--mono b { font: 700 1.05em/1.2 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #fff; max-width: 9em; }
+
+.sc-portada .pt-hero { align-self: center; display: flex; flex-direction: column; align-items: flex-start; padding-bottom: 1em; }
+.sc-portada .pt-kicker { display: inline-flex; align-items: center; gap: .9em; color: var(--crea-t); margin: 0 0 .5em .35em; }
+.sc-portada .pt-for { color: #fff; opacity: .88; white-space: pre; }
+.sc-portada .pt-dot { width: .8em; height: .8em; border-radius: 50%; background: var(--crea); box-shadow: 0 0 0 .32em rgba(15,32,62,.9), 0 0 0 .4em rgba(51,190,172,.55), 0 0 1.4em var(--crea); }
+
+/* the year: digits roll up from a mask with perspective; the last one is teal */
+.sc-portada .pt-year { font: 900 17.4em/.86 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.035em; display: flex; perspective: 70em; margin: 0 0 0 -.05em; color: #fff; }
+.sc-portada .pt-pair { display: flex; }
+.sc-portada .pt-dg { display: inline-block; overflow: hidden; padding: .02em .035em .1em; margin: 0 -.035em; }
+.sc-portada .pt-dg > i { display: block; font-style: normal; transform-origin: 50% 100%; }
+.sc-portada .pt-dg--six > i { color: var(--crea); }
+.is-active .sc-portada .pt-dg > i { animation: pt-digit .95s var(--out) calc(.12s + var(--i) * .085s) backwards; }
+@keyframes pt-digit { from { transform: translateY(104%) rotateX(-62deg); opacity: .2; } 60% { opacity: 1; } }
+
+.sc-portada .pt-sub { font: 500 1.85em/1.3 var(--font-poppins, Poppins), sans-serif; margin: .55em 0 0 .2em; color: #eaf0fa; max-width: 30em; }
+.sc-portada .pt-w { font-weight: 600; }
+.sc-portada .pt-w--compite { color: var(--compite-l); } .sc-portada .pt-w--crea { color: var(--crea-t); } .sc-portada .pt-w--conecta { color: var(--conecta-l); }
+.sc-portada .pt-cta { margin: 1.5em 0 0 .2em; }
+.sc-portada .pt-cta svg { transition: transform .35s var(--out); }
+.sc-portada .pt-cta:hover svg { transform: translateX(.3em); }
+
+/* ---------- film band ---------- */
+.sc-portada .pt-reel { position: absolute; left: 0; right: 0; bottom: 3.4em; height: 13.6em; z-index: 3; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 80%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 80%, transparent); }
+.sc-portada .pt-track { display: flex; align-items: flex-start; width: max-content; height: 100%; margin-left: 6.5em; --k: 1; }
+.is-active .sc-portada .pt-track { animation: pt-drift 120s linear infinite; }
+.sc-portada .pt-reel:hover .pt-track, .sc-portada .pt-reel.is-held .pt-track, .is-paused .sc-portada .pt-track { animation-play-state: paused; }
+@keyframes pt-drift { to { transform: translateX(-50%); } }
+.sc-portada .pt-fr { position: relative; flex: none; margin: calc(var(--y) * var(--k) * 1em) 1.9em 0 0; width: calc(var(--w) * var(--k) * 1em); height: calc(var(--h) * var(--k) * 1em); }
+.sc-portada .pt-fr .pt-ph { position: absolute; inset: 0; }
+.is-active .sc-portada .pt-fr:not(.is-dup) { animation: pt-fr-in 1.1s var(--out) calc(1.25s + var(--i) * .1s) backwards; }
+@keyframes pt-fr-in { from { opacity: 0; transform: translateY(3.4em); clip-path: inset(100% 0 0 0); } }
+.sc-portada .pt-fr .node { box-shadow: 0 0 1.2em color-mix(in srgb, var(--nc) 50%, transparent); }
+
+.sc-portada .pt-ctl { position: absolute; right: 3em; bottom: 17.8em; z-index: 4; }
+.is-static .sc-portada .pt-ctl { display: none; }
+
+/* ---------- portrait: year stacked (20 / 26), orbit big behind, reel as a single row ---------- */
+@container rw (max-aspect-ratio: 1/1) {
+  .sc-portada { --pt-x: 3.2em; }
+  .sc-portada .pt-ring { left: 50%; top: 36%; width: 128em; }
+  .sc-portada .pt-glow { left: 62%; top: 38%; width: 40em; }
+  .sc-portada .pt-grid { bottom: 18.6em; padding-top: 3.6em; }
+  .sc-portada .pt-top { min-height: 3.4em; gap: 1em; }
+  .sc-portada .pt-lockup { height: 3.4em; }
+  .sc-portada .pt-x { font-size: 1.4em; }
+  .sc-portada .pt-co { height: 3.2em; }
+  .sc-portada .pt-co--logo { padding: .4em 1em; }
+  .sc-portada .pt-co--mono i { width: 3.2em; height: 3.2em; font-size: 1.2em; }
+  .sc-portada .pt-co--mono b { font-size: .85em; max-width: 7em; }
+  .sc-portada .pt-hero { align-self: center; padding-bottom: .5em; }
+  .sc-portada .pt-kicker { font-size: .95em; }
+  .sc-portada .pt-year { flex-direction: column; font-size: min(20.5em, 27.5cqh); line-height: .84; margin-left: -.04em; }
+  .sc-portada .pt-sub { font-size: 1.5em; margin-top: .8em; max-width: 20em; }
+  .sc-portada .pt-cta { margin-top: 1.1em; }
+  .sc-portada .pt-reel { bottom: 7.2em; height: 9.6em; }
+  .sc-portada .pt-track { --k: .56; }
+  .sc-portada .pt-fr { margin-right: 1.2em; }
+  .sc-portada .pt-ctl { right: 1.6em; bottom: auto; top: 2.8em; }
+}

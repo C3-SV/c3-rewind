@@ -37,6 +37,7 @@ export default async function DevelopmentPreview({ params }: { params: Promise<{
     <StaticDeck
       slides={resolveSlides(year, company ? "private" : "general")}
       edition={year}
+      photos={edition.photos}
       imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined}
       recipient={companyForView}
       isDevelopment

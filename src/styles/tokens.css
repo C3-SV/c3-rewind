@@ -1,29 +1,61 @@
+/* C3 Rewind — foundations. Colours/fonts come from the C3 Design System (tokens.json). */
+@property --r { syntax: '<length>'; inherits: true; initial-value: 200vmax; }
+@property --sx { syntax: '<number>'; inherits: true; initial-value: 50; }
+@property --sy { syntax: '<number>'; inherits: true; initial-value: 50; }
+@property --sd { syntax: '<number>'; inherits: true; initial-value: 40; }
+@property --so { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --gap { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --rad { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
 :root {
   color-scheme: dark;
+  /* identity */
   --navy: #0f203e;
   --navy-d: #0c1830;
+  --navy-x: #091326;
   --navy-2: #16294a;
   --line: #21365c;
   --compite: #205298;
-  --compite-light: #6fa0dd;
+  --compite-l: #6fa0dd;
   --crea: #33beac;
-  --crea-light: #4fd6c4;
+  --crea-t: #4fd6c4;
   --conecta: #4f5ba9;
-  --conecta-light: #9aa4e0;
-  --copa: #6d529e;
-  --copa-light: #b9a6ea;
-  --htc: #f28c28;
-  --htc-navy: #0b2447;
+  --conecta-l: #9aa4e0;
   --soft: #a9b8d0;
-  --focus: #7fb0ea;
-  --ease-rewind: cubic-bezier(.65, 0, .15, 1);
-  --ease-out-rewind: cubic-bezier(.16, 1, .3, 1);
+  --foco: #7fb0ea;
+  /* events */
+  --copa-p: #6d529e;
+  --copa-pl: #b9a6ea;
+  --htc-o: #f28c28;
+  --htc-b: #0b2447;
+  --warn: #e8b15c;
+  /* motion */
+  --ease: cubic-bezier(.65, 0, .15, 1);
+  --out: cubic-bezier(.16, 1, .3, 1);
+  --spring: cubic-bezier(.2, .9, .25, 1.12);
+  --soft-out: cubic-bezier(.22, .8, .24, 1);
+  /* legacy aliases used by older modules */
+  --compite-light: var(--compite-l);
+  --crea-light: var(--crea-t);
+  --conecta-light: var(--conecta-l);
+  --copa: var(--copa-p);
+  --copa-light: var(--copa-pl);
+  --htc: var(--htc-o);
+  --htc-navy: var(--htc-b);
+  --focus: var(--foco);
+  --ease-rewind: var(--ease);
+  --ease-out-rewind: var(--out);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { background: var(--navy-d); scroll-behavior: smooth; }
-body { margin: 0; background: var(--navy-d); color: #fff; font-family: var(--font-poppins, Poppins), system-ui, sans-serif; }
-button, a { font: inherit; }
-button { color: inherit; }
-button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-::selection { color: var(--navy-d); background: var(--crea-light); }
+html { background: var(--navy-x); }
+body { margin: 0; background: var(--navy-x); color: #fff; font-family: var(--font-poppins, Poppins), system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, h4, p, figure, blockquote, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; border-radius: 6px; }
+::selection { color: var(--navy-d); background: var(--crea-t); }
+body:has(.rewind-app.is-live) { overflow: hidden; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }

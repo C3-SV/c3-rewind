@@ -1,0 +1,133 @@
+/* HUELLA — the symbol re-cast as a pair. Base state = final state; motion only under .is-active. */
+.sc-huella { --cl: var(--conecta-l); overflow: clip; }
+
+/* ---- the system (left) ---- */
+.hu-sys { --S: 44em; position: absolute; left: 2.5em; top: 6.4em; width: var(--S); height: var(--S); }
+.hu-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.hu-svg * { fill: none; }
+.hu-svg--back { z-index: 0; } .hu-svg--front { z-index: 3; }
+.hu-r { stroke: rgba(255,255,255,.3); stroke-width: 1; }
+.hu-r--out { stroke: rgba(154,164,224,.55); }
+.hu-r--in { stroke: rgba(255,255,255,.34); }
+.hu-dots { stroke: rgba(255,255,255,.5); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 0 12.46; }
+.hu-turn { transform-origin: 200px 200px; animation: hu-turn 200s linear infinite; }
+.hu-link { stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
+.hu-thread { stroke: var(--cl); stroke-width: 1.2; }
+.hu-spark { fill: var(--crea) !important; }
+.hu-spark-p { stroke: var(--crea); stroke-width: 1.2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+
+.hu-photo { position: absolute; z-index: 1; left: 12.5%; top: 12.5%; width: 75%; height: 75%; border-radius: 50%;
+  --h: calc(var(--S) * .132);
+  -webkit-mask: radial-gradient(circle var(--h) at 94.5% 27.3%, transparent 98%, #000 100%), radial-gradient(circle var(--h) at 94.5% 72.7%, transparent 98%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask: radial-gradient(circle var(--h) at 94.5% 27.3%, transparent 98%, #000 100%), radial-gradient(circle var(--h) at 94.5% 72.7%, transparent 98%, #000 100%);
+  mask-composite: intersect; }
+.hu-photo .ph { width: 100%; height: 100%; }
+.hu-photo .ph > img { object-fit: cover; }
+.hu-sat { position: absolute; z-index: 2; width: calc(var(--S) * .14); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; box-shadow: 0 0 0 .35em var(--navy-d), 0 0 0 .45em rgba(255,255,255,.3); }
+.hu-sat .ph { width: 100%; height: 100%; }
+
+.hu-pair { position: absolute; z-index: 4; width: calc(var(--S) * .196); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; display: grid; place-items: center; overflow: hidden; box-shadow: 0 0 0 .22em rgba(255,255,255,.22), 0 1.2em 2.8em rgba(5,12,28,.45); }
+.hu-pair--c3 { background: #101830; }
+.hu-pair--c3 img { width: 100%; height: 100%; }
+.hu-pair--co { background: #fff; color: var(--navy); }
+.hu-pair--co img { width: 76%; height: 76%; object-fit: contain; }
+.hu-pair--co b { font: 800 calc(var(--S) * .052)/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.03em; }
+
+/* ---- head + thread (right) ---- */
+.hu-head { position: absolute; z-index: 5; left: 54.2em; top: 6.8em; width: 41em; display: flex; flex-direction: column; align-items: flex-start; }
+.hu-h { margin-top: .5em; font: 800 5.1em/1.01 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.035em; }
+
+.hu-evs { position: absolute; z-index: 5; left: 52.4em; top: 24.4em; width: 44.6em; height: 27.4em; padding-left: 1.8em; display: flex; flex-direction: column; justify-content: flex-start; gap: 1.9em; }
+.hu-trunk { position: absolute; left: 0; top: .2em; bottom: 0; width: 0; border-left: .08em solid rgba(154,164,224,.55); transform-origin: top; }
+
+.hu-ev { --ec: var(--cl); --ec2: var(--cl); position: relative; }
+.hu-ev--copa { --ec: var(--copa-pl); --ec2: var(--compite-l); }
+.hu-ev--htc { --ec: var(--htc-o); --ec2: #3d6cb0; }
+.hu-ev--impact { --ec: var(--crea); --ec2: var(--crea); }
+.hu-mk { position: absolute; left: -2.25em; top: .25em; width: .9em; height: .9em; border-radius: 50%; background: var(--ec); box-shadow: 0 0 0 .38em var(--navy-d), 0 0 1.4em color-mix(in srgb, var(--ec) 70%, transparent); }
+.hu-mk::after { content: ""; position: absolute; right: -.62em; bottom: -.62em; width: .6em; height: .6em; border-radius: 50%; background: var(--ec2); box-shadow: 0 0 0 .22em var(--navy-d); }
+.hu-ev--impact .hu-mk::after { display: none; }
+.hu-ek { margin-bottom: .55em; font: 700 max(10px, .85em)/1.2 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .15em; text-transform: uppercase; color: var(--ec); }
+.hu-s { font: 700 1.7em/1.26 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.018em; max-width: 24em; text-wrap: balance; }
+.hu-s em { font-style: normal; color: var(--ec); }
+.hu-s b { font-weight: 800; }
+.hu--n1 .hu-s { font-size: 2.1em; }
+.hu-dl { margin: .9em 0 0; display: flex; flex-direction: column; gap: .5em; max-width: 39em; }
+.hu-row { display: grid; grid-template-columns: 9.6em 1fr; gap: .2em 1.2em; align-items: baseline; }
+.hu-row dt { display: flex; align-items: center; gap: .55em; font: 700 max(10px, .78em)/1.2 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .13em; text-transform: uppercase; color: var(--ec); white-space: nowrap; }
+.hu-row dt .ic { width: 1.25em; height: 1.25em; }
+.hu-row dd { margin: 0; font: 400 1.05em/1.45 var(--font-poppins, Poppins), sans-serif; color: #e3eaf5; }
+.hu-q { margin: 1em 0 0; display: grid; grid-template-columns: auto 1fr; gap: .2em 1em; max-width: 36em; }
+.hu-q .ic { width: 1.6em; height: 1.6em; color: var(--ec); grid-row: 1 / 3; margin-top: .15em; }
+.hu-q p { font: 500 1.12em/1.45 var(--font-poppins, Poppins), sans-serif; font-style: italic; color: #fff; }
+.hu-q footer { font: 600 max(10px, .85em)/1.3 var(--font-poppins, Poppins), sans-serif; color: var(--soft); }
+.hu-impact { display: flex; gap: 2.4em; flex-wrap: wrap; }
+.hu-impact li { display: flex; flex-direction: column; gap: .15em; }
+.hu-impact b { font: 800 2.9em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.03em; color: #fff; }
+.hu-impact span { font: 600 max(10px, .85em)/1.25 var(--font-poppins, Poppins), sans-serif; color: var(--soft); max-width: 11em; }
+.hu-thanks { font: 700 1.9em/1.25 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.02em; max-width: 17em; }
+.hu-ev--draft .hu-s { font-size: 1.6em; }
+.hu-ev--draft .pend { border-bottom-width: .06em; }
+
+/* dense: two events and/or impact + quote */
+.hu--dense .hu-evs { gap: 1.3em; }
+.hu--dense .hu-s { font-size: 1.38em; }
+.hu--dense .hu-dl { margin-top: .6em; gap: .3em; }
+.hu--dense .hu-row dd { font-size: 1em; line-height: 1.38; }
+.hu--dense .hu-q { margin-top: .6em; }
+.hu--dense .hu-q p { font-size: 1.02em; line-height: 1.38; }
+.hu--dense .hu-impact b { font-size: 2.3em; }
+.hu--dense .hu-ek { margin-bottom: .35em; }
+
+/* ---- motion ---- */
+.is-active .hu-photo { animation: hu-iris 1.7s var(--ease) .35s backwards; }
+.is-active .hu-sat { animation: rw-pop 1s var(--spring) var(--d) backwards; }
+.is-active .hu-spark { animation: rw-pop .8s var(--spring) 2.4s backwards; }
+.is-active .hu-spark-p { animation: hu-ping 3.6s ease-out 3s infinite; }
+.is-active .hu-pair--c3 { animation: hu-in-c3 1.1s var(--spring) var(--d) backwards; }
+.is-active .hu-pair--co { animation: hu-in-co 1.1s var(--spring) var(--d) backwards; }
+.is-active .hu-trunk { animation: hu-grow 1.8s var(--ease) 2.1s backwards; }
+.is-active .hu-ev { animation: hu-ev 1.1s var(--out) var(--d) backwards; }
+.is-active .hu-mk { animation: rw-pop .8s var(--spring) calc(var(--d) - .1s) backwards; }
+.is-active .hu-thanks { animation: rw-rise 1s var(--out) 2.4s backwards; }
+.is-paused .hu-turn, .is-paused .hu-spark-p { animation-play-state: paused; }
+@keyframes hu-iris { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+@keyframes hu-turn { to { transform: rotate(360deg); } }
+@keyframes hu-ping { 0% { opacity: .8; transform: scale(1); } 100% { opacity: 0; transform: scale(6); } }
+@keyframes hu-grow { from { transform: scaleY(0); } }
+@keyframes hu-ev { from { opacity: 0; transform: translateX(1.6em); } }
+@keyframes hu-in-c3 { from { opacity: 0; transform: translateX(-9em) scale(.5); } }
+@keyframes hu-in-co { from { opacity: 0; transform: translateX(-9em) scale(.5); } }
+
+/* ---- portrait: system on top, thread below ---- */
+@container rw (max-aspect-ratio: 1/1) {
+  .hu-sys { --S: 30em; left: 50%; translate: -50% 0; top: 5.4em; }
+  .hu-svg--front .hu-thread { display: none; }
+  .hu-head { left: 2.2em; top: 37.4em; width: 32em; }
+  .hu-h { margin-top: .4em; font-size: 3.1em; line-height: 1.02; }
+  .hu-evs { left: 2.2em; top: 49.2em; width: 32em; height: auto; bottom: 7em; padding-left: 1.7em; gap: 1.2em; }
+  .hu-trunk { top: .1em; }
+  .hu-mk { left: -2.05em; width: .85em; height: .85em; }
+  .hu-s, .hu--n1 .hu-s { font-size: 1.4em; max-width: none; }
+  .hu-ek { font-size: .9em; margin-bottom: .4em; }
+  .hu-dl { margin-top: .7em; max-width: none; }
+  .hu-row { grid-template-columns: 1fr; gap: .1em; }
+  .hu-row dd { font-size: 1.12em; }
+  .hu-q p { font-size: 1.12em; }
+  .hu-q footer { font-size: .95em; }
+  .hu-impact { gap: 1.6em; }
+  .hu-impact b, .hu--dense .hu-impact b { font-size: 2.3em; }
+  .hu-thanks { font-size: 1.7em; }
+  .hu--dense .hu-sys { --S: 24em; top: 5em; }
+  .hu--dense .hu-head { top: 31em; }
+  .hu--dense .hu-h { font-size: 2.6em; }
+  .hu--dense .hu-evs { top: 40.4em; gap: .9em; }
+  .hu--dense .hu-s { font-size: 1.18em; }
+  .hu--dense .hu-ek { margin-bottom: .2em; }
+  .hu--dense .hu-dl { margin-top: .35em; }
+  .hu--dense .hu-row { grid-template-columns: 7em 1fr; gap: .8em; }
+  .hu--dense .hu-row dd, .hu--dense .hu-q p { font-size: .98em; }
+  .is-active .hu-ev { animation-name: hu-ev-p; }
+}
+@keyframes hu-ev-p { from { opacity: 0; transform: translateY(1.4em); } }

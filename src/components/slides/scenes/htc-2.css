@@ -1,0 +1,101 @@
+/* HTC-2 · Lo que construyeron. Base = final frame; animation only under .is-active. 1em = 1cqw (landscape). */
+.sc-htc-2 { overflow: clip; }
+
+.sc-htc-2 .h2-ghost { position: absolute; z-index: 1; right: -3.5em; top: -6em; font: 900 27em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.07em; color: transparent; -webkit-text-stroke: .018em rgba(255, 255, 255, .1); pointer-events: none; user-select: none; }
+.is-active .sc-htc-2 .h2-ghost { animation: rw-fade 2.4s ease .2s backwards; }
+
+/* ---- copy column (right) ---- */
+.sc-htc-2 .h2-col { position: absolute; z-index: 8; left: 62em; top: 6.2em; width: 33em; height: 43.6em; display: flex; flex-direction: column; align-items: flex-start; }
+.sc-htc-2 .h2-eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: .6em 1.1em; }
+.sc-htc-2 .h2-eyebrow .ev-k { margin: 0; }
+.sc-htc-2 .h2-title { margin-top: .26em; font: 800 4.5em/1.03 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.035em; white-space: nowrap; }
+.sc-htc-2 .h2-body { margin-top: 1em; max-width: 29em; font: 400 1.2em/1.5 var(--font-poppins, Poppins), sans-serif; color: #dfe7f3; }
+.sc-htc-2 .h2-body .pend { white-space: nowrap; }
+.sc-htc-2 .h2-mid { display: none; }
+
+.sc-htc-2 .h2-win { margin-top: auto; }
+.sc-htc-2 .h2-badge { display: inline-flex; align-items: center; gap: .55em; padding: .5em 1.15em .5em .9em; border-radius: 99px; background: var(--htc-o); color: #1b1004; font: 800 max(10px, .85em)/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.sc-htc-2 .h2-badge .ic { width: 1.3em; height: 1.3em; }
+.sc-htc-2 .h2-team { margin-top: .5em; font: 800 2.3em/1.08 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.03em; }
+.sc-htc-2 .h2-team .pend, .sc-htc-2 .h2-line .pend { border-bottom-width: .06em; }
+.sc-htc-2 .h2-line { margin-top: .45em; font: 400 1.1em/1.45 var(--font-poppins, Poppins), sans-serif; color: #e3eaf5; }
+
+.sc-htc-2 .h2-quote { margin: 3.5em 0 0; display: grid; grid-template-columns: auto 1fr; gap: 1.2em; align-items: center; width: 100%; }
+.sc-htc-2 .h2-portrait { width: 5.6em; aspect-ratio: 1; box-shadow: 0 0 0 .14em var(--htc-o), 0 0 0 .38em rgba(11, 36, 71, .9); }
+.sc-htc-2 .h2-quote blockquote { margin: 0; }
+.sc-htc-2 .h2-qi { width: 1.4em; height: 1.4em; color: var(--htc-o); margin-bottom: .15em; }
+.sc-htc-2 .h2-quote p { font: 500 1.1em/1.4 var(--font-poppins, Poppins), sans-serif; }
+.sc-htc-2 .h2-quote figcaption { margin-top: .4em; font: 500 max(10px, .85em)/1.3 var(--font-poppins, Poppins), sans-serif; color: var(--soft); }
+
+/* ---- mosaic: six tiles assemble from a scatter and close their gaps into ONE image ---- */
+.sc-htc-2 .h2-cluster { position: absolute; inset: 0; z-index: 3; }
+.sc-htc-2 .h2-mosaic { position: absolute; z-index: 2; left: 5em; top: 6.2em; width: 50em; height: 31.8em; display: grid; grid-template: repeat(2, 1fr) / repeat(3, 1fr); gap: 0; }
+.sc-htc-2 .h2-tl { position: relative; overflow: hidden; background: #1c3359; --bx: 0%; --by: 100%; --bs: .001em; }
+.sc-htc-2 .h2-tl--1 { border-radius: 1.4em 0 0 0; } .sc-htc-2 .h2-tl--3 { border-radius: 0 1.4em 0 0; }
+.sc-htc-2 .h2-tl--4 { border-radius: 0 0 0 1.4em; } .sc-htc-2 .h2-tl--6 { border-radius: 0 0 1.4em 0; --bx: 100%; --by: 100%; --bs: 8.3em; }
+.sc-htc-2 .h2-tp.ph { position: absolute; width: 300%; height: 200%; border-radius: 0; }
+.sc-htc-2 .h2-tp::before { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(125deg, rgba(11, 36, 71, .5), rgba(11, 36, 71, 0) 50%), linear-gradient(0deg, rgba(242, 140, 40, .26), rgba(242, 140, 40, 0) 42%); }
+.sc-htc-2 .h2-tl--1 .h2-tp { left: 0; top: 0; } .sc-htc-2 .h2-tl--2 .h2-tp { left: -100%; top: 0; } .sc-htc-2 .h2-tl--3 .h2-tp { left: -200%; top: 0; }
+.sc-htc-2 .h2-tl--4 .h2-tp { left: 0; top: -100%; } .sc-htc-2 .h2-tl--5 .h2-tp { left: -100%; top: -100%; } .sc-htc-2 .h2-tl--6 .h2-tp { left: -200%; top: -100%; }
+.sc-htc-2 .h2-mlabel { position: absolute; z-index: 6; left: 1.4em; bottom: 1.2em; display: inline-flex; align-items: center; gap: .6em; font: 600 max(10px, .78em)/1.2 var(--font-poppins, Poppins), sans-serif; color: rgba(255, 255, 255, .85); text-shadow: 0 1px 6px rgba(7, 16, 34, .7); }
+
+.is-active .sc-htc-2 .h2-mosaic { animation: h2-gap 1.3s var(--ease) 3s backwards; }
+@keyframes h2-gap { from { gap: .9em; } }
+.is-active .sc-htc-2 .h2-tl { animation: h2-tile 1.3s var(--spring) calc(.45s + var(--i) * .24s) backwards, h2-rad 1.3s var(--ease) 3s backwards; }
+@keyframes h2-tile { from { opacity: 0; transform: translate(var(--ax), var(--ay)) rotate(var(--ar)) scale(.55); } }
+@keyframes h2-rad { from { border-radius: 1.1em; } }
+.is-active .sc-htc-2 .h2-mlabel { animation: rw-fade 1s ease 3.6s backwards; }
+
+/* the node lands on the mosaic corner and becomes the medal */
+.sc-htc-2 .hx-ride { opacity: 0; }
+.is-active .sc-htc-2 .hx-ride { animation: h2-ride var(--rd, 2.6s) var(--rease, cubic-bezier(.45, .05, .35, 1)) var(--r0, .7s) backwards; }
+@keyframes h2-ride { from { offset-distance: 0%; opacity: 1; } 90% { opacity: 1; } to { offset-distance: 100%; opacity: 0; } }
+
+.sc-htc-2 .h2-medal { --cx: 55; --cy: 38; --cd: 10.4; position: absolute; z-index: 5; left: calc((var(--cx) - var(--cd) / 2) * 1em); top: calc((var(--cy) - var(--cd) / 2) * 1em); width: calc(var(--cd) * 1em); aspect-ratio: 1; }
+.sc-htc-2 .h2-medal__g { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sc-htc-2 .h2-medal__veil { fill: rgba(7, 22, 52, .6); }
+.sc-htc-2 .h2-medal__rim { fill: none; stroke: rgba(255, 255, 255, .3); stroke-width: .5; }
+.sc-htc-2 .h2-medal__dash { fill: none; stroke: var(--htc-o); stroke-width: 1.1; stroke-linecap: round; stroke-dasharray: 1.2 3.7; transform-origin: 0 0; }
+.sc-htc-2 .h2-medal__disc { fill: var(--htc-o); filter: drop-shadow(0 0 1.4px rgba(242, 140, 40, .9)); }
+.sc-htc-2 .h2-medal__echo { fill: none; stroke: var(--htc-o); stroke-width: .35; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.sc-htc-2 .h2-medal__ic { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 3.2em; height: 3.2em; color: #1b1004; stroke-width: 1.8; }
+.is-active .sc-htc-2 .h2-medal { animation: rw-pop 1s var(--spring) 3.2s backwards; }
+.is-active .sc-htc-2 .h2-medal__ic { animation: rw-pop .8s var(--spring) 3.5s backwards; }
+.is-active .sc-htc-2 .h2-medal__dash { animation: rw-spin 40s linear 4s infinite; }
+.is-active .sc-htc-2 .h2-medal__echo { animation: h2-echo 4.6s ease-out 4.2s infinite; }
+.is-active .sc-htc-2 .h2-medal__echo--2 { animation-delay: 5.8s; }
+@keyframes h2-echo { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.9); opacity: 0; } }
+
+/* ---- chips + ribbon ---- */
+.sc-htc-2 .h2-chips { position: absolute; z-index: 4; left: 5em; top: 40.8em; display: flex; flex-wrap: wrap; gap: .7em; width: 45em; }
+.sc-htc-2 .h2-chips li { padding: .6em 1.1em; border-radius: 99px; background: rgba(255, 255, 255, .07); border: .08em solid rgba(255, 255, 255, .22); font: 600 max(10px, .85em)/1 var(--font-poppins, Poppins), sans-serif; color: #e9eef7; }
+.sc-htc-2 .h2-chips .pend { border-bottom: 0; opacity: .75; }
+.sc-htc-2 .h2-tail { position: absolute; z-index: 9; left: 5em; top: 46.2em; }
+
+/* ---- PORTRAIT: title, big mosaic with the medal on its edge, winner, quote ---- */
+@container rw (max-aspect-ratio: 1/1) {
+  .sc-htc-2 { display: flex; flex-direction: column; padding: 5.4em 1.6em 6.8em; gap: 1.1em; overflow-x: hidden; overflow-y: auto; }
+  .sc-htc-2 .h2-ghost { font-size: 17em; right: -2em; top: -2em; }
+  .sc-htc-2 .h2-col { display: contents; }
+  .sc-htc-2 .h2-eyebrow { order: 1; flex: none; gap: .5em .9em; }
+  .sc-htc-2 .h2-title { order: 2; margin-top: 0; font-size: 3.9em; flex: none; }
+  .sc-htc-2 .h2-body { order: 3; margin-top: 0; max-width: none; font-size: 1.05em; flex: none; }
+  .sc-htc-2 .h2-cluster { order: 4; position: relative; inset: auto; flex: none; height: 26.5em; margin-inline: -1.6em; margin-top: .3em; }
+  .sc-htc-2 .h2-win { order: 5; margin-top: 0; flex: none; }
+  .sc-htc-2 .h2-team { font-size: 2.2em; }
+  .sc-htc-2 .h2-line { font-size: 1.05em; }
+  .sc-htc-2 .h2-quote { order: 6; margin-top: .4em; flex: none; grid-template-columns: auto 1fr; gap: 1em; }
+  .sc-htc-2 .h2-portrait { width: 5em; }
+  .sc-htc-2 .h2-quote p { font-size: 1.02em; }
+  .sc-htc-2 .h2-chips { order: 7; position: relative; left: auto; top: auto; width: auto; flex: none; gap: .5em; }
+  .sc-htc-2 .h2-tail { order: 8; position: relative; left: auto; top: auto; flex: none; }
+  .sc-htc-2 .h2-mosaic { left: 1.6em; top: .5em; width: 33.2em; height: 20.5em; }
+  .sc-htc-2 .h2-tl--6 { --bs: .001em; }
+  .sc-htc-2 .h2-tl--4 { --bx: 3.8em; --by: 100%; --bs: 6em; }
+  .sc-htc-2 .h2-medal { --cx: 5.4; --cy: 21; --cd: 7.8; }
+  .sc-htc-2 .h2-medal__ic { width: 2.4em; height: 2.4em; }
+  .sc-htc-2 .h2-route--l { display: none; }
+}
+@container rw (min-aspect-ratio: 1/1) {
+  .sc-htc-2 .h2-route--p { display: none; }
+}

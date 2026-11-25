@@ -1,0 +1,35 @@
+/* Motion vocabulary. Base state = FINAL state; animation only runs while an ancestor has .is-active. */
+.rv, .rv-l, .rv-r, .rv-s, .rv-f, .ln > span, .draw, .wipe { --d: 0s; }
+.is-active .rv { animation: rw-rise 1s var(--out) var(--d) backwards; }
+.is-active .rv-l { animation: rw-from-l 1.1s var(--out) var(--d) backwards; }
+.is-active .rv-r { animation: rw-from-r 1.1s var(--out) var(--d) backwards; }
+.is-active .rv-s { animation: rw-pop 1s var(--spring) var(--d) backwards; }
+.is-active .rv-f { animation: rw-fade 1.1s ease var(--d) backwards; }
+.ln { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.ln > span { display: block; }
+.is-active .ln > span { animation: rw-lineup 1.1s var(--out) var(--d) backwards; }
+.draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.is-active .draw { animation: rw-draw 1.6s var(--ease) var(--d) backwards; }
+/* horizontal clip wipe (photos, bars) */
+.is-active .wipe { animation: rw-wipe 1.3s var(--ease) var(--d) backwards; }
+.is-active .wipe-c { animation: rw-iris-in 1.5s var(--ease) var(--d) backwards; }
+
+@keyframes rw-rise { from { opacity: 0; transform: translateY(1.6em); } }
+@keyframes rw-from-l { from { opacity: 0; transform: translateX(-3em); } }
+@keyframes rw-from-r { from { opacity: 0; transform: translateX(3em); } }
+@keyframes rw-pop { from { opacity: 0; transform: scale(.6); } }
+@keyframes rw-fade { from { opacity: 0; } }
+@keyframes rw-lineup { from { transform: translateY(108%); } }
+@keyframes rw-draw { from { stroke-dashoffset: 1; } }
+@keyframes rw-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes rw-iris-in { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+@keyframes rw-spin { to { transform: rotate(360deg); } }
+@keyframes rw-float { 50% { transform: translateY(-.5em); } }
+@keyframes rw-nudge { 50% { box-shadow: 0 0 0 .7em rgba(255, 255, 255, .16); } }
+
+/* Reduced motion (OS or manual toggle) and static/PDF: everything resolves to its final frame. */
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after,
+.is-static *, .is-static *::before, .is-static *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .rewind-app *, .rewind-app *::before, .rewind-app *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

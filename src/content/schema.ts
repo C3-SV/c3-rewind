@@ -55,6 +55,12 @@ const BlockSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("initiative"), title: z.string(), body: z.string(), status: EditorialStatusSchema }),
 ]);
 
+const FactSchema = z.object({
+  icon: z.enum(["cal", "pin", "clock", "users", "team", "school", "flag", "trophy"]),
+  text: z.string(),
+  status: EditorialStatusSchema,
+});
+
 export const SlideSchema = z.object({
   id: SlideIdSchema,
   chapter: z.enum(["apertura", "compite", "crea", "conecta", "equipo", "futuro", "cierre"]),
@@ -67,6 +73,7 @@ export const SlideSchema = z.object({
   background: z.enum(["navy", "compite", "crea", "conecta", "copa", "htc"]).default("navy"),
   body: z.string().optional(),
   blocks: z.array(BlockSchema).default([]),
+  facts: z.array(FactSchema).default([]),
   editorialNotes: z.array(z.string()).default([]),
 });
 
@@ -74,6 +81,8 @@ export const EditionSchema = z.object({
   year: z.number().int().min(2000).max(2100),
   title: z.string(),
   publicationStatus: z.enum(["draft", "review", "approved"]),
+  /** Optional named photo slots (e.g. "reel1", "copa2", "grupo"). Scenes render a designed frame until a slot is filled. */
+  photos: z.record(z.string(), MediaSchema).default({}),
   slides: z.array(SlideSchema).min(1),
 }).superRefine((edition, context) => {
   const seen = new Set<string>();
@@ -89,4 +98,6 @@ export type EditorialStatus = z.infer<typeof EditorialStatusSchema>;
 export type SlideId = z.infer<typeof SlideIdSchema>;
 export type Slide = z.infer<typeof SlideSchema>;
 export type Edition = z.infer<typeof EditionSchema>;
+export type Fact = z.infer<typeof FactSchema>;
+export type Media = z.infer<typeof MediaSchema>;
 export type ContentBlock = z.infer<typeof BlockSchema>;

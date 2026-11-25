@@ -1,0 +1,91 @@
+/* ===== GRACIAS — palabra gigante enmascarada + foto circular con mordisco =====
+   The orbit field (pose gracias: centre 80% / 52%, 44cqw) circles the photo, so the photo sits at the same centre. */
+.sc-gracias { --gx: 4.4em; overflow: clip; }
+
+/* ---------- copy ---------- */
+.sc-gracias .gr-copy { position: absolute; left: var(--gx); top: 0; bottom: 0; width: 57em; display: flex; flex-direction: column; justify-content: center; padding-bottom: 1em; z-index: 2; }
+.sc-gracias .gr-h1 { font-size: 1em; font-family: var(--font-montserrat, Montserrat), sans-serif; font-weight: 800; letter-spacing: -.045em; color: #fff; display: flex; flex-direction: column; align-items: flex-start; }
+.sc-gracias .gr-word { display: inline-flex; }
+/* masked letters: each rises from its own mask */
+.sc-gracias .gr-l { display: inline-block; overflow: hidden; padding: .16em .05em .14em; margin: -.16em -.05em -.14em; }
+.sc-gracias .gr-l > i { display: block; font-style: normal; }
+.is-active .sc-gracias .gr-l > i { animation: gr-letter 1.05s var(--out) var(--d) backwards; }
+@keyframes gr-letter { from { transform: translateY(112%) rotate(7deg); } }
+
+.sc-gracias .gr-big { font-size: 15.6em; line-height: .86; margin-left: -.04em; }
+.sc-gracias .gr-tail { font-size: 3.7em; line-height: 1.12; letter-spacing: -.03em; margin: .55em 0 0 .06em; }
+.sc-gracias .gr-year { font-style: normal; color: var(--crea); }
+.sc-gracias .gr-para { font: 400 1.5em/1.55 var(--font-poppins, Poppins), sans-serif; color: #dfe7f3; max-width: 27em; margin: 1.3em 0 0 .15em; }
+
+/* ---------- photo (circle, iris reveal, node bite) ---------- */
+.sc-gracias .gr-photo { position: absolute; left: 80%; top: 52%; width: 28em; aspect-ratio: 1; translate: -50% -50%; z-index: 1; }
+.sc-gracias .gr-photo__in { position: absolute; inset: 0; }
+.sc-gracias .gr-ph { position: absolute; inset: 0; box-shadow: 0 2em 5em rgba(4,10,24,.45); }
+.sc-gracias .gr-photo > .node { z-index: 3; }
+.sc-gracias .gr-bnode { box-shadow: 0 0 1.8em color-mix(in srgb, var(--conecta-l) 60%, transparent); }
+.is-active .sc-gracias .gr-bnode::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--conecta-l); animation: gr-ping 4.5s ease-out 2.6s infinite; }
+@keyframes gr-ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(3.4); opacity: 0; } }
+.sc-gracias .gr-rings { position: absolute; left: 80%; top: 52%; width: 0; height: 0; z-index: 0; }
+.sc-gracias .gr-ring { position: absolute; left: 0; top: 0; translate: -50% -50%; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); }
+.sc-gracias .gr-ring--a { width: 33em; aspect-ratio: 1; }
+.sc-gracias .gr-ring--b { width: 47em; aspect-ratio: 1; border-color: rgba(154,164,224,.18); border-style: dashed; }
+
+/* ---------- company variant: «Gracias, <Empresa>.» ---------- */
+.sc-gracias.is-company .gr-photo { width: 25em; }
+.sc-gracias.is-company .gr-copy { width: 60em; justify-content: center; }
+.sc-gracias.is-company .gr-hello { font-size: 6em; line-height: 1; margin-left: -.02em; color: #fff; }
+.sc-gracias.is-company .gr-name { display: block; font-size: min(17em, calc(60em / (var(--n) * .64 + .5))); line-height: .9; margin: .02em 0 0 -.04em; text-wrap: balance; max-width: 60em; }
+.sc-gracias.is-company .gr-name__w { display: inline; }
+.sc-gracias.is-company .gr-name__w .gr-l { display: inline-block; }
+.sc-gracias.is-company .gr-dot { display: inline-block; overflow: hidden; padding: .16em .05em .14em; margin: -.16em 0 -.14em; color: var(--crea); }
+.sc-gracias.is-company .gr-dot > i { display: block; font-style: normal; }
+.is-active .sc-gracias.is-company .gr-dot > i { animation: gr-letter 1.05s var(--out) var(--d) backwards; }
+.sc-gracias.is-company .gr-msg { margin-top: 1.8em; max-width: 36em; }
+.sc-gracias.is-company .gr-welcome { font: 400 1.4em/1.55 var(--font-poppins, Poppins), sans-serif; color: #dfe7f3; margin: 0 0 1em; }
+.sc-gracias.is-company .gr-welcome--pending { font-size: 1.1em; color: var(--soft); }
+.sc-gracias.is-company .gr-closing { font: 600 1.7em/1.35 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.01em; color: #fff; margin: 0; max-width: 21em; }
+
+/* the pair on the rim (landscape) */
+.sc-gracias .gr-link { position: absolute; inset: 0; pointer-events: none; }
+.sc-gracias .gr-link svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sc-gracias .gr-arc { fill: none; stroke: rgba(255,255,255,.72); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.sc-gracias .gr-link__node { position: absolute; left: 115.7%; top: 50%; width: 1.5em; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--crea); box-shadow: 0 0 0 .5em rgba(15,32,62,.9), 0 0 1.6em var(--crea); }
+.sc-gracias .gr-slot { position: absolute; width: 6.6em; aspect-ratio: 1; translate: -50% -50%; left: 92.4%; }
+.sc-gracias .gr-slot--a { top: 23.5%; } .sc-gracias .gr-slot--b { top: 76.5%; }
+.sc-gracias .gr-medal { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #fff; box-shadow: 0 .8em 2em rgba(4,10,24,.4); }
+.sc-gracias .gr-medal img { width: 100%; height: 100%; object-fit: cover; }
+.sc-gracias .gr-medal--logo img { object-fit: contain; padding: 18%; }
+.sc-gracias .gr-medal--c3 { background: #0f203e; box-shadow: 0 .8em 2em rgba(4,10,24,.4), 0 0 0 .14em rgba(255,255,255,.55); }
+.sc-gracias .gr-medal--mono b { font: 800 2.3em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.03em; color: var(--navy); }
+.sc-gracias .gr-pair { display: none; }
+
+/* ---------- portrait: word fills the width, photo below, the pair as a joined row ---------- */
+@container rw (max-aspect-ratio: 1/1) {
+  .sc-gracias { --gx: 3.2em; }
+  .sc-gracias .gr-copy { left: 0; right: 0; width: auto; top: 5.4em; bottom: 7.6em; padding: 0 var(--gx); justify-content: flex-start; }
+  .sc-gracias .gr-big { font-size: min(9.1em, 22cqw); }
+  .sc-gracias .gr-tail { font-size: 2.45em; margin-top: .5em; }
+  .sc-gracias .gr-para { font-size: 1.22em; margin-top: .9em; max-width: 29em; }
+  .sc-gracias .gr-photo { left: auto; right: -2.2em; top: auto; bottom: 7.4em; translate: none; width: min(25em, 33cqh); }
+  .sc-gracias .gr-rings { left: auto; right: 0; top: auto; bottom: 0; }
+  .sc-gracias .gr-ring--a { translate: -10.5em -10.5em; width: 31em; }
+  .sc-gracias .gr-ring--b { translate: -10.5em -10.5em; width: 43em; }
+  .sc-gracias .gr-rings { left: calc(100% - 8em); top: calc(100% - 17em); right: auto; bottom: auto; }
+  .sc-gracias .gr-ring--a, .sc-gracias .gr-ring--b { translate: -50% -50%; }
+  /* company */
+  .sc-gracias.is-company .gr-photo { width: min(19em, 26cqh); right: -1.4em; }
+  .sc-gracias.is-company .gr-copy { width: auto; }
+  .sc-gracias.is-company .gr-hello { font-size: 4.3em; }
+  .sc-gracias.is-company .gr-name { font-size: min(14em, calc(33em / (var(--n) * .64 + .5))); max-width: none; }
+  .sc-gracias.is-company .gr-link { display: none; }
+  .sc-gracias.is-company .gr-pair { display: flex; align-items: center; gap: 0; margin-top: 1.1em; width: 21em; }
+  .sc-gracias.is-company .gr-pair .gr-medal { width: 4.6em; flex: none; }
+  .sc-gracias.is-company .gr-pair__line { position: relative; flex: 1; height: 1px; }
+  .sc-gracias.is-company .gr-pair__line i { position: absolute; inset: 0; background: rgba(255,255,255,.7); transform-origin: left; }
+  .is-active .sc-gracias.is-company .gr-pair__line i { animation: gr-line 1.2s var(--ease) 1.6s backwards; }
+  .sc-gracias.is-company .gr-pair__node { position: absolute; left: 50%; top: 50%; width: 1.2em; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--crea); box-shadow: 0 0 1.2em var(--crea); }
+  .sc-gracias.is-company .gr-msg { margin-top: 1.1em; max-width: 21em; }
+  .sc-gracias.is-company .gr-welcome { font-size: 1.1em; margin-bottom: .6em; }
+  .sc-gracias.is-company .gr-closing { font-size: 1.28em; max-width: 18em; }
+}
+@keyframes gr-line { from { transform: scaleX(0); } }

@@ -3,85 +3,86 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Slide } from "../../content/schema.ts";
 
+export type Origin = { x: number; y: number } | null; // percent of the stage
+
+type Transition = { leaving: number | null; origin: Origin; token: number };
+
+/** Navigation state. The user can advance at any moment — a new go() cancels the running transition. */
 export function usePresentation(slides: Slide[]) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [transition, setTransition] = useState<Transition>({ leaving: null, origin: null, token: 0 });
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [transitionDirection, setTransitionDirection] = useState<"forward" | "backward">("forward");
-  const activeIndexRef = useRef(0);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const indexRef = useRef(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touch = useRef<{ x: number; y: number; t: number; origin: Origin } | null>(null);
+  const reduced = useRef(false);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const setFromSystem = () => setReducedMotion(media.matches);
-    setFromSystem();
-    media.addEventListener("change", setFromSystem);
+    const sync = () => { reduced.current = media.matches; setReducedMotion(media.matches); };
+    sync();
+    media.addEventListener("change", sync);
     const stableId = decodeURIComponent(window.location.hash.slice(1));
-    const restoredIndex = slides.findIndex((slide) => slide.id === stableId);
-    if (restoredIndex >= 0) {
-      activeIndexRef.current = restoredIndex;
-      setActiveIndex(restoredIndex);
-    }
-    return () => media.removeEventListener("change", setFromSystem);
+    const restored = slides.findIndex((slide) => slide.id === stableId);
+    if (restored > 0) { indexRef.current = restored; setActiveIndex(restored); }
+    return () => media.removeEventListener("change", sync);
   }, [slides]);
 
-  useEffect(() => () => {
-    if (transitionTimer.current) clearTimeout(transitionTimer.current);
-  }, []);
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
 
-  const go = useCallback((next: number) => {
-    const bounded = Math.max(0, Math.min(slides.length - 1, next));
-    const previous = activeIndexRef.current;
-    if (bounded === previous) return;
-    activeIndexRef.current = bounded;
-    setActiveIndex(bounded);
-    setTransitionDirection(bounded > previous ? "forward" : "backward");
-    if (transitionTimer.current) clearTimeout(transitionTimer.current);
-    transitionTimer.current = setTimeout(() => { transitionTimer.current = null; }, reducedMotion ? 0 : 720);
-    const stableId = slides[bounded]?.id;
-    if (stableId && typeof window !== "undefined") {
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${encodeURIComponent(stableId)}`);
+  const go = useCallback((target: number, origin: Origin = null) => {
+    const next = Math.max(0, Math.min(slides.length - 1, target));
+    const previous = indexRef.current;
+    if (next === previous) return;
+    indexRef.current = next;
+    setActiveIndex(next);
+    if (timer.current) clearTimeout(timer.current);
+    if (reduced.current) {
+      setTransition((t) => ({ leaving: null, origin: null, token: t.token + 1 }));
+    } else {
+      setTransition((t) => ({ leaving: previous, origin, token: t.token + 1 }));
+      timer.current = setTimeout(() => { timer.current = null; setTransition((t) => ({ ...t, leaving: null })); }, 1250);
     }
-  }, [reducedMotion, slides]);
+    const stableId = slides[next]?.id;
+    if (stableId) window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${encodeURIComponent(stableId)}`);
+  }, [slides]);
+
+  const originOf = (event: { clientX: number; clientY: number; detail?: number } | undefined, stage: HTMLElement | null): Origin => {
+    if (!event || !stage || event.detail === 0) return null;
+    const box = stage.getBoundingClientRect();
+    return { x: ((event.clientX - box.left) / box.width) * 100, y: ((event.clientY - box.top) / box.height) * 100 };
+  };
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target;
       if (target instanceof HTMLElement && target.closest("input, textarea, select, [contenteditable='true']")) return;
       if (event.key === " " && target instanceof HTMLElement && target.closest("button, a, summary")) return;
-      if (event.key === "ArrowRight" || event.key === "PageDown") { event.preventDefault(); go(activeIndex + 1); }
-      else if (event.key === "ArrowLeft" || event.key === "PageUp") { event.preventDefault(); go(activeIndex - 1); }
+      const i = indexRef.current;
+      if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.key === "PageDown") { event.preventDefault(); go(i + 1); }
+      else if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "PageUp") { event.preventDefault(); go(i - 1); }
       else if (event.key === "Home") { event.preventDefault(); go(0); }
       else if (event.key === "End") { event.preventDefault(); go(slides.length - 1); }
       else if (event.key === " ") { event.preventDefault(); setPaused((value) => !value); }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeIndex, go, slides.length]);
+  }, [go, slides.length]);
 
   const onTouchStart = (event: React.TouchEvent) => {
-    const touch = event.changedTouches[0];
-    if (touch) touchStart.current = { x: touch.clientX, y: touch.clientY };
+    const t = event.changedTouches[0];
+    if (t) touch.current = { x: t.clientX, y: t.clientY, t: Date.now(), origin: null };
   };
-  const onTouchEnd = (event: React.TouchEvent) => {
-    const start = touchStart.current;
-    const touch = event.changedTouches[0];
-    touchStart.current = null;
-    if (!start || !touch) return;
-    const dx = touch.clientX - start.x;
-    const dy = touch.clientY - start.y;
-    if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.35) go(activeIndex + (dx < 0 ? 1 : -1));
+  const onTouchEnd = (event: React.TouchEvent, stage: HTMLElement | null) => {
+    const start = touch.current; const t = event.changedTouches[0];
+    touch.current = null;
+    if (!start || !t) return;
+    const dx = t.clientX - start.x; const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4 && Date.now() - start.t < 900) {
+      go(indexRef.current + (dx < 0 ? 1 : -1), originOf({ clientX: t.clientX, clientY: t.clientY, detail: 1 }, stage));
+    }
   };
 
-  return {
-    activeIndex,
-    paused,
-    setPaused,
-    reducedMotion,
-    transitionDirection,
-    go,
-    onTouchStart,
-    onTouchEnd,
-  };
+  return { activeIndex, transition, paused, setPaused, reducedMotion, go, originOf, onTouchStart, onTouchEnd };
 }

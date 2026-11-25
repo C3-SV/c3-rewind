@@ -40,5 +40,5 @@ export default async function EditionPage({ params }: { params: Promise<Params> 
   });
   if (mode === "blocked") notFound();
 
-  return <RewindPlayer slides={resolveSlides(year, "general")} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={process.env.NODE_ENV !== "production"} isReviewPreview={mode === "review" && process.env.NODE_ENV === "production"} />;
+  return <RewindPlayer slides={resolveSlides(year, "general")} photos={edition.photos} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={process.env.NODE_ENV !== "production"} isReviewPreview={mode === "review" && process.env.NODE_ENV === "production"} />;
 }

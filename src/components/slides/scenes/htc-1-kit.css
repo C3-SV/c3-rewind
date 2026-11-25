@@ -1,0 +1,23 @@
+/* HTC shared kit: route + node language used by htc-1 and htc-2. Base state = final state. */
+.hx-svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.hx-svg--route { z-index: 4; }
+.hx-svg--node { z-index: 7; }
+
+.hx-ghost { fill: none; stroke: rgba(255, 255, 255, .26); stroke-width: .12; stroke-dasharray: .25 .7; stroke-linecap: round; }
+.hx-line { fill: none; stroke: var(--htc-o); stroke-width: .17; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; filter: drop-shadow(0 0 .35em rgba(242, 140, 40, .55)); }
+.hx-dot { fill: var(--htc-o); }
+
+.hx-ride { offset-distance: 100%; offset-rotate: 0deg; filter: drop-shadow(0 0 .7em rgba(242, 140, 40, .85)); }
+.hx-node { fill: var(--htc-o); }
+.hx-ping { fill: none; stroke: var(--htc-o); stroke-width: .1; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.is-active .hx-ping { animation: hx-ping 3.8s ease-out calc(var(--r0, 2s) + var(--rd, 3s) + .4s) infinite; }
+@keyframes hx-ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(4.2); opacity: 0; } }
+
+.is-active .hx-line { animation: hx-draw var(--rd, 3s) var(--rease, cubic-bezier(.45, .05, .35, 1)) var(--r0, 2s) backwards; }
+.is-active .hx-ghost { animation: rw-fade 1.2s ease var(--g0, 1.2s) backwards; }
+.is-active .hx-dot { animation: rw-pop .8s var(--spring) var(--r0, 2s) backwards; }
+.is-active .hx-ride { animation: hx-travel var(--rd, 3s) var(--rease, cubic-bezier(.45, .05, .35, 1)) var(--r0, 2s) backwards; }
+@keyframes hx-draw { from { stroke-dashoffset: 1; } }
+@keyframes hx-travel { from { offset-distance: 0%; } }
+
+.hx-ribbon { display: inline-flex; }

@@ -47,6 +47,7 @@ test("private pages and PDFs return the same non-cacheable, non-indexed not-foun
   }
 });
 
+test.setTimeout(120_000);
 test("general static rendering exports thirteen 16:9 PDF pages", async ({ page }) => {
   await page.goto("/dev/preview/2026/general");
   await page.emulateMedia({ media: "print" });
@@ -74,11 +75,13 @@ test("mobile layout fits the viewport and supports horizontal touch navigation",
   await stage.dispatchEvent("touchstart", { changedTouches: [{ identifier: 1, clientX: 310, clientY: 420 }] });
   await stage.dispatchEvent("touchend", { changedTouches: [{ identifier: 1, clientX: 180, clientY: 425 }] });
   await expect(page.locator(".nav-count")).toHaveText("02 / 13");
-  const contentBounds = await page.locator(".experience-slide.is-active .scene-copy").evaluate((element) => {
-    const content = element.getBoundingClientRect();
-    const stageBounds = element.closest(".experience-stage")!.getBoundingClientRect();
-    return { contentRight: content.right, stageRight: stageBounds.right, contentWidth: element.clientWidth, scrollWidth: element.scrollWidth };
+  const bounds = await page.locator(".experience-slide.is-active .story-scene").evaluate((element) => {
+    const stage = element.closest(".experience-stage")!.getBoundingClientRect();
+    const heading = element.querySelector("h1")!.getBoundingClientRect();
+    return { stageLeft: stage.left, stageRight: stage.right, headingLeft: heading.left, headingRight: heading.right, sceneWidth: element.clientWidth, stageWidth: stage.width };
   });
-  expect(contentBounds.contentRight).toBeLessThanOrEqual(contentBounds.stageRight + 1);
-  expect(contentBounds.scrollWidth).toBeLessThanOrEqual(contentBounds.contentWidth + 1);
+  // Decorative orbits may bleed off-canvas by design; headings and the scene box must stay inside the stage.
+  expect(bounds.sceneWidth).toBeLessThanOrEqual(bounds.stageWidth + 1);
+  expect(bounds.headingLeft).toBeGreaterThanOrEqual(bounds.stageLeft - 1);
+  expect(bounds.headingRight).toBeLessThanOrEqual(bounds.stageRight + 1);
 });

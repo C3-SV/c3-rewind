@@ -8,8 +8,9 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "../styles/tokens.css";
-import "../styles/rewind.css";
-import "../styles/experience.css";
+import "../styles/motion.css";
+import "../styles/primitives.css";
+import "../styles/stage.css";
 
 export const metadata: Metadata = {
   title: "C3 Rewind",
