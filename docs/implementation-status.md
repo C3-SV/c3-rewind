@@ -20,7 +20,7 @@ Para cambiar el estado hay que aportar y aprobar el contenido requerido, validar
 - La revocación de configuración basada en archivo entra en vigor al desplegar de nuevo; no hay almacenamiento dinámico para invalidación inmediata.
 - Los PDFs privados se versionan dentro del repositorio privado para que Vercel los empaquete fuera de `public/`; restringir acceso al repositorio y vigilar el límite de tamaño de la función.
 - ImageKit es opcional y su endpoint está preparado; faltan la configuración real de la cuenta y la carga de medios definitivos.
-- No se hicieron cambios DNS, despliegues, publicación externa ni conexión de cuentas.
+- El código está en el repositorio privado `C3-SV/c3-rewind`, rama `main`. No se creó un proyecto Vercel, no se desplegó el sitio ni se modificó DNS.
 - El HTML adjunto y el guion definen narrativa/estilo, pero faltan datos, fotos, testimonios y logos empresariales definitivos. La forma de slides y el sistema de navegación están listos para recibirlos.
 
 ## Verificación automatizada

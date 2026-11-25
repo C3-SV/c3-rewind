@@ -17,7 +17,7 @@ Los tokens forman parte de la ruta privada. Next omite esas rutas del log de con
 
 En Vercel, añadir `rewind.c3.com.sv` como dominio del proyecto y seguir los registros DNS que indique el panel para esa cuenta. Los registros exactos dependen de la configuración del proyecto; no fijarlos en el repositorio. Activar HTTPS y configurar `REWIND_SITE_ORIGIN=https://rewind.c3.com.sv`.
 
-No se han modificado DNS, creado servicios ni publicado el proyecto.
+El código está en el repositorio privado `C3-SV/c3-rewind` (rama `main`). Aún no se creó el proyecto Vercel, no se desplegó el sitio ni se modificó DNS.
 
 ## Operación
 
