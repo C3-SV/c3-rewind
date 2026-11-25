@@ -143,6 +143,7 @@
   .vo-h { font-size: 3.2em; }
   .vo-fig { justify-self: start; margin-left: 1em; }
   .vo-q { font-size: 1.95em; } .vo-q--s { font-size: 2.5em; } .vo-q--l { font-size: 1.7em; }
+  .vo-q.is-pend { font-size: 1.5em; }
   .vo-qg { font-size: 12em; top: -.3em; }
   .vo-who { font-size: 1.15em; }
   .vo-rail { justify-content: center; gap: .5em; }
