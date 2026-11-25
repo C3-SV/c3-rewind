@@ -4,7 +4,7 @@ Aplicación Next.js para la experiencia anual de C3 Rewind. El motor de presenta
 
 ## Estado de esta edición
 
-La aplicación funciona localmente y está preparada para desplegarse. La edición 2026 **no está editorialmente lista para distribución**: cifras, imágenes, autorizaciones, testimonios, mensajes privados y fichas de empresas siguen pendientes. Producción bloquea la edición general mientras `REWIND_GENERAL_PUBLISHED=false` y no sirve experiencias privadas que no cumplan el validador. No hay tokens reales ni PDF privado generado en el repositorio.
+La edición 2026 **no está editorialmente lista para distribución**. `/2026` muestra una vista pública de revisión, marcada y no indexable, para que el equipo revise las slides y pendientes. Cualquier persona con el enlace puede verla. Las rutas personalizadas y los PDFs siguen bloqueados hasta aprobar el contenido. No hay tokens reales ni PDFs privados versionados.
 
 ## Requisitos y ejecución local
 

@@ -6,6 +6,7 @@ export function proxy(request: NextRequest) {
   const privatePath = /^\/\d{4}\/p\/[^/]+(?:\/|$)/.test(pathname);
   const devPath = pathname.startsWith("/dev/");
   const indexableGeneralPath = pathname === `/${process.env.REWIND_LATEST_EDITION ?? "2026"}` &&
+    process.env.REWIND_GENERAL_PREVIEW === "false" &&
     process.env.REWIND_INDEX_GENERAL === "true" && process.env.REWIND_GENERAL_PUBLISHED === "true";
   response.headers.set("Referrer-Policy", "no-referrer");
   if (privatePath || devPath || !indexableGeneralPath) {

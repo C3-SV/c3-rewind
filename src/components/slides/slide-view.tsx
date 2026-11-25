@@ -24,6 +24,8 @@ type Props = {
   imageKitEndpoint?: string;
   recipient?: RecipientPresentation;
   isDevelopment?: boolean;
+  showDraftContent?: boolean;
+  hidePdf?: boolean;
   staticMode?: boolean;
   onStart?: () => void;
   pdfHref: string;
@@ -94,8 +96,9 @@ function Placeholder({ label, isDevelopment }: { label: string; isDevelopment: b
   );
 }
 
-export function SlideView({ slide, edition, imageKitEndpoint, recipient, isDevelopment = false, staticMode = false, onStart, pdfHref }: Props) {
-  const blocks = visibleBlocks(slide, isDevelopment);
+export function SlideView({ slide, edition, imageKitEndpoint, recipient, isDevelopment = false, showDraftContent = false, hidePdf = false, staticMode = false, onStart, pdfHref }: Props) {
+  const showEditorialContent = isDevelopment || showDraftContent;
+  const blocks = visibleBlocks(slide, showEditorialContent);
   const color = slide.chapter === "compite" ? "compite" : slide.chapter === "crea" ? "crea" : slide.chapter === "conecta" ? "conecta" : "navy";
   const className = ["story-scene", `scene--${slide.layout}`, `scene--${slide.background}`, staticMode ? "is-static" : ""].filter(Boolean).join(" ");
   const name = recipient?.commercialName;
@@ -122,10 +125,10 @@ export function SlideView({ slide, edition, imageKitEndpoint, recipient, isDevel
         {blocks.length > 0 && <div className={`story-blocks story-blocks--${slide.layout}`}><ContentBlocks blocks={blocks} imageKitEndpoint={imageKitEndpoint} staticMode={staticMode} /></div>}
         {slide.layout === "cover" && !staticMode && <button className="story-cta" onClick={onStart}>Comenzar <span aria-hidden="true">→</span></button>}
         {slide.layout === "cover" && <div className="cover-mark"><img src="/brand/lockup.png" alt="C3" />{partnerLogo && <><span aria-hidden="true">×</span><img src={partnerLogo} alt={name ?? "Empresa aliada"} /></>}</div>}
-        {slide.layout === "thanks" && <Placeholder label={name ? "participación de la empresa" : "comunidad C3"} isDevelopment={isDevelopment} />}
-        {slide.layout === "event" && <Placeholder label="Copa · competencia y premiación" isDevelopment={isDevelopment} />}
-        {slide.layout === "build" && <Placeholder label="HTC · equipos construyendo" isDevelopment={isDevelopment} />}
-        {slide.layout === "connect" && <Placeholder label="talleres y comunidad" isDevelopment={isDevelopment} />}
+        {slide.layout === "thanks" && <Placeholder label={name ? "participación de la empresa" : "comunidad C3"} isDevelopment={showEditorialContent} />}
+        {slide.layout === "event" && <Placeholder label="Copa · competencia y premiación" isDevelopment={showEditorialContent} />}
+        {slide.layout === "build" && <Placeholder label="HTC · equipos construyendo" isDevelopment={showEditorialContent} />}
+        {slide.layout === "connect" && <Placeholder label="talleres y comunidad" isDevelopment={showEditorialContent} />}
         {slide.layout === "imprint" && recipient && (
           <div className="partner-huella">
             <p>{name} apoyó {recipient.supportedEvents.join(" · ") || "[EVENTO PENDIENTE]"}.</p>
@@ -147,14 +150,14 @@ export function SlideView({ slide, edition, imageKitEndpoint, recipient, isDevel
             {recipient?.contactDestination && <a className="story-cta" href={recipient.contactDestination}>Conversemos <span aria-hidden="true">→</span></a>}
             {recipient?.contactDestination && <p className="pdf-contact">Contacto: {recipient.contactDestination}</p>}
             <a className="home-link" href="https://c3.com.sv" rel="noreferrer">C3 · c3.com.sv</a>
-            <a className="pdf-link" href={pdfHref}>Descargar PDF</a>
+            {!hidePdf && <a className="pdf-link" href={pdfHref}>Descargar PDF</a>}
           </>
         )}
       </div>
       {slide.layout === "cover" && <div className="cover-orbits"><OrbitMotif quiet={staticMode} /></div>}
       {slide.layout === "imprint" && partnerLogo && <img className="partner-logo" src={partnerLogo} alt={name ?? "Empresa aliada"} />}
       {slide.layout === "close" && partnerLogo && <div className="closing-marks"><img src="/brand/lockup.png" alt="C3" /><span aria-hidden="true">×</span><img src={partnerLogo} alt={name ?? "Empresa aliada"} /></div>}
-      {isDevelopment && slide.editorialNotes.length > 0 && !staticMode && (
+      {showEditorialContent && slide.editorialNotes.length > 0 && !staticMode && (
         <aside className="editorial-notes"><b>Pendientes editoriales</b><ul>{slide.editorialNotes.map((note) => <li key={note}>{note}</li>)}</ul></aside>
       )}
     </article>

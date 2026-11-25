@@ -13,3 +13,7 @@ debug.log
 .env.*
 !.env.example
 src/server/private/recipients.local.json
+private/pdfs/*
+!private/pdfs/.gitkeep
+private/media/*
+!private/media/.gitkeep

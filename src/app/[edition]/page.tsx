@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RewindPlayer } from "../../components/rewind/rewind-player.tsx";
-import { getEdition, isEditionPublishable, resolveSlides } from "../../content/editions.ts";
+import { getEdition, getGeneralExperienceMode, isEditionPublishable, resolveSlides } from "../../content/editions.ts";
 import { env } from "../../server/env.ts";
 
 export const dynamic = "force-dynamic";
@@ -11,12 +11,17 @@ type Params = { edition: string };
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { edition: year } = await params;
+  let publishable = false;
+  try { publishable = isEditionPublishable(getEdition(year)); } catch {}
+  const indexable = env.REWIND_GENERAL_PREVIEW === "false" &&
+    env.REWIND_INDEX_GENERAL === "true" && env.REWIND_GENERAL_PUBLISHED === "true" &&
+    publishable && year === env.REWIND_LATEST_EDITION;
   return {
     title: "C3 Rewind",
     description: "Un año de competencia, creación y conexión.",
     robots: {
-      index: process.env.REWIND_INDEX_GENERAL === "true" && process.env.REWIND_GENERAL_PUBLISHED === "true" && year === (process.env.REWIND_LATEST_EDITION ?? "2026"),
-      follow: process.env.REWIND_INDEX_GENERAL === "true" && process.env.REWIND_GENERAL_PUBLISHED === "true" && year === (process.env.REWIND_LATEST_EDITION ?? "2026"),
+      index: indexable,
+      follow: indexable,
       noarchive: true,
     },
     openGraph: { title: "C3 Rewind", description: "Un año de competencia, creación y conexión.", type: "website" },
@@ -28,9 +33,12 @@ export default async function EditionPage({ params }: { params: Promise<Params> 
   let edition;
   try { edition = getEdition(year); } catch { notFound(); }
 
-  if (process.env.NODE_ENV === "production" && (
-    process.env.REWIND_GENERAL_PUBLISHED !== "true" || !isEditionPublishable(edition)
-  )) notFound();
+  const mode = getGeneralExperienceMode(edition, {
+    production: process.env.NODE_ENV === "production",
+    published: env.REWIND_GENERAL_PUBLISHED === "true",
+    preview: env.REWIND_GENERAL_PREVIEW === "true" && year === env.REWIND_LATEST_EDITION,
+  });
+  if (mode === "blocked") notFound();
 
-  return <RewindPlayer slides={resolveSlides(year, "general")} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={process.env.NODE_ENV !== "production"} />;
+  return <RewindPlayer slides={resolveSlides(year, "general")} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={process.env.NODE_ENV !== "production"} isReviewPreview={mode === "review" && process.env.NODE_ENV === "production"} />;
 }

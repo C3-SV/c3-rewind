@@ -13,10 +13,11 @@ type Props = {
   imageKitEndpoint?: string;
   recipient?: RecipientPresentation;
   isDevelopment?: boolean;
+  isReviewPreview?: boolean;
   pdfHref?: string;
 };
 
-export function RewindPlayer({ slides, edition, imageKitEndpoint, recipient, isDevelopment = false, pdfHref: pdfHrefProp }: Props) {
+export function RewindPlayer({ slides, edition, imageKitEndpoint, recipient, isDevelopment = false, isReviewPreview = false, pdfHref: pdfHrefProp }: Props) {
   const [fullscreen, setFullscreen] = useState(false);
   const presentation = usePresentation(slides);
   const active = slides[presentation.activeIndex];
@@ -55,6 +56,8 @@ export function RewindPlayer({ slides, edition, imageKitEndpoint, recipient, isD
               imageKitEndpoint={imageKitEndpoint}
               recipient={recipient}
               isDevelopment={isDevelopment}
+              showDraftContent={isReviewPreview}
+              hidePdf={isReviewPreview}
               onStart={() => presentation.go(1)}
               pdfHref={pdfHref}
             />
@@ -71,6 +74,7 @@ export function RewindPlayer({ slides, edition, imageKitEndpoint, recipient, isD
         onFullscreen={toggleFullscreen}
       />
       {isDevelopment && <p className="dev-ribbon">VISTA DE DESARROLLO · {recipient ? "EMPRESA" : "GENERAL"}</p>}
+      {isReviewPreview && <p className="dev-ribbon review-ribbon" role="status">VISTA PÚBLICA DE REVISIÓN · DATOS PENDIENTES</p>}
       <span className="sr-only" aria-live="polite">{active ? `Slide ${presentation.activeIndex + 1}: ${active.title}` : ""}</span>
     </main>
   );

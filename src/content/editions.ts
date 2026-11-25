@@ -3,6 +3,16 @@ import { EditionSchema, type ContentBlock, type Edition, type Slide } from "./sc
 
 export type EditionView = "general" | "private";
 export type SlideOverrides = { disabled?: string[]; order?: string[] };
+export type GeneralExperienceMode = "published" | "review" | "blocked";
+
+export function getGeneralExperienceMode(
+  edition: Edition,
+  access: { production: boolean; published: boolean; preview: boolean },
+): GeneralExperienceMode {
+  if (access.published && isEditionPublishable(edition)) return "published";
+  if (!access.production || access.preview) return "review";
+  return "blocked";
+}
 
 const editions: Record<string, unknown> = { "2026": general2026 };
 

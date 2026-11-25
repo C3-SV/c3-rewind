@@ -10,7 +10,7 @@ La migración visual aún no equivale a una reproducción cuadro por cuadro de t
 
 ## Estado editorial 2026
 
-La edición general queda bloqueada en producción. El validador muestra información pendiente por slide; no se sustituyó con cifras o evidencia inventadas. Las fichas de Applaudo, TechyWe, RSM, Ravn y Crecer son borradores: no acreditan apoyo, no contienen logos/eventos aprobados y no tienen tokens. Por ello no se emiten enlaces empresariales ni PDFs de distribución.
+La edición 2026 sigue en borrador. Por solicitud del equipo, `/2026` muestra una vista pública de revisión marcada como tal, no indexable y con pendientes visibles. Cualquiera con el enlace puede acceder; no debe compartirse fuera del equipo si los borradores son sensibles. No se sustituyó información pendiente por evidencia inventada. Las fichas empresariales siguen sin aprobar y no se emiten enlaces empresariales ni PDFs privados.
 
 Para cambiar el estado hay que aportar y aprobar el contenido requerido, validar logos/permisos/contactos, ejecutar `npm run content:validate -- --edition 2026 --publish` y luego generar, revisar y versionar los PDFs. La revisión editorial no es parte de una publicación automática.
 
@@ -18,9 +18,9 @@ Para cambiar el estado hay que aportar y aprobar el contenido requerido, validar
 
 - Los enlaces son credenciales transferibles: cualquiera que los reciba puede reenviarlos.
 - La revocación de configuración basada en archivo entra en vigor al desplegar de nuevo; no hay almacenamiento dinámico para invalidación inmediata.
-- Los PDFs privados se versionan dentro del repositorio privado para que Vercel los empaquete fuera de `public/`; restringir acceso al repositorio y vigilar el límite de tamaño de la función.
+- El repositorio es público. `.gitignore` excluye los archivos reales de `private/pdfs/` y `private/media/`; no versionar datos de destinatarios aprobados. Las rutas privadas de Vercel requieren un origen privado para esos archivos antes de activar experiencias reales.
 - ImageKit es opcional y su endpoint está preparado; faltan la configuración real de la cuenta y la carga de medios definitivos.
-- El código está en el repositorio privado `C3-SV/c3-rewind`, rama `main`. No se creó un proyecto Vercel, no se desplegó el sitio ni se modificó DNS.
+- El código está en el repositorio público `C3-SV/c3-rewind`, rama `main`; la vista de revisión se sirve en `https://c3-rewind.vercel.app/2026`. El dominio oficial de C3 todavía no está configurado.
 - El HTML adjunto y el guion definen narrativa/estilo, pero faltan datos, fotos, testimonios y logos empresariales definitivos. La forma de slides y el sistema de navegación están listos para recibirlos.
 
 ## Verificación automatizada

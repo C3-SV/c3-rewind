@@ -1,13 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { EditionSchema } from "../../src/content/schema.ts";
-import { getEdition, isEditionPublishable } from "../../src/content/editions.ts";
+import { getEdition, getGeneralExperienceMode, isEditionPublishable } from "../../src/content/editions.ts";
 
 test("the unreviewed 2026 content is not considered publishable", () => {
   const edition = getEdition("2026");
 
   assert.equal(edition.publicationStatus, "draft");
   assert.equal(isEditionPublishable(edition), false);
+});
+
+test("production can show unapproved general content only in explicit review mode", () => {
+  const edition = getEdition("2026");
+
+  assert.equal(getGeneralExperienceMode(edition, { production: true, published: false, preview: true }), "review");
+  assert.equal(getGeneralExperienceMode(edition, { production: true, published: false, preview: false }), "blocked");
+  assert.equal(getGeneralExperienceMode(edition, { production: false, published: false, preview: false }), "review");
 });
 
 test("a photo gallery blocks publication until its assets are approved", () => {
