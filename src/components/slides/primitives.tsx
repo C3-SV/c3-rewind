@@ -106,7 +106,7 @@ export function Photo({ slot, label, tone = "navy", circle = false, small = fals
         </svg>
       </div>
       {real && <img src={resolveMediaSource(real, imageKitEndpoint)} alt={real.alt} loading="lazy" style={{ objectPosition: real.focalPoint ? `${real.focalPoint.x}% ${real.focalPoint.y}%` : undefined }} />}
-      {showDraft && !real && label && <span className="ph__tag"><Icon name="cam" /><span className="l">Foto · {label}</span></span>}
+      {!real && <span className="ph__tag"><Icon name="cam" /><span className="l">FOTO PENDIENTE{label ? ` · ${label}` : ""}</span></span>}
       {children}
     </div>
   );
