@@ -58,9 +58,11 @@
 .sc-etapa .et-col:focus-visible { outline-offset: .6em; }
 .sc-etapa .et-id { position: relative; flex: none; width: 8.4em; height: 8.4em; transition: transform .8s var(--out); }
 .sc-etapa .et-col:hover .et-id, .sc-etapa .et-col:focus-visible .et-id { transform: scale(1.14) rotate(-16deg); }
-.sc-etapa .et-ringc { position: absolute; inset: .4em; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--ac) 62%, transparent); transform-origin: 6.79em 1.46em; transition: border-color .5s; -webkit-mask: radial-gradient(circle 2.4em at 6.79em 1.46em, transparent 98%, #000 100%); mask: radial-gradient(circle 2.4em at 6.79em 1.46em, transparent 98%, #000 100%); }
+.sc-etapa .et-ringc { position: absolute; inset: .4em; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--ac) 62%, transparent); transform-origin: 6.79em 1.46em; transition: border-color .5s; -webkit-mask: radial-gradient(circle 2.2em at 7.19em 1.86em, transparent 98%, #000 100%); mask: radial-gradient(circle 2.2em at 7.19em 1.86em, transparent 98%, #000 100%); }
 .sc-etapa .et-col:hover .et-ringc, .sc-etapa .et-col:focus-visible .et-ringc { border-color: var(--ac); }
-.sc-etapa .et-en { position: absolute; left: 7.19em; top: 1.86em; width: 3.2em; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--nc); box-shadow: 0 0 1.8em color-mix(in srgb, var(--nc) 55%, transparent); }
+/* the destination box keeps its size and centre (flight maths measure it); the line's logo sits in it, centred */
+.sc-etapa .et-en { position: absolute; left: 7.19em; top: 1.86em; width: 3.2em; aspect-ratio: 1; translate: -50% -50%; }
+.sc-etapa .et-en img { position: absolute; left: 50%; top: 50%; width: 3.6em; height: auto; max-width: none; translate: -50% -50%; pointer-events: none; }
 .is-active .sc-etapa .et-en { animation: et-land 1s var(--spring) var(--arr) backwards; }
 .is-active .sc-etapa .et-ringc { animation: et-ring-in 1.3s var(--out) var(--arr) backwards; }
 @keyframes et-land { from { opacity: 0; scale: .55; } }

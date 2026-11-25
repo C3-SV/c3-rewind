@@ -12,7 +12,7 @@ function Letters({ text, delay = 0.2, step = 0.055, className = "" }: { text: st
   return (
     <span className={`gr-word ${className}`} aria-hidden="true">
       {[...text].map((ch, i) => (
-        <span className="gr-l" key={i}><i style={{ "--d": `${(delay + i * step).toFixed(2)}s` } as CSSProperties}>{ch === " " ? " " : ch}</i></span>
+        <span className="gr-l" key={i}><i style={{ "--d": `${(delay + i * step).toFixed(2)}s` } as CSSProperties}>{ch === " " ? " " : ch}</i></span>
       ))}
     </span>
   );
@@ -38,11 +38,6 @@ export function GraciasScene() {
   if (recipient) {
     return (
       <article className="story-scene sc-gracias is-company" data-slide-id={slide.id} aria-label={slide.title}>
-        <div className="gr-rings" aria-hidden="true">
-          <i className="gr-ring gr-ring--a wipe-c" style={{ "--d": ".9s" } as CSSProperties} />
-          <i className="gr-ring gr-ring--b wipe-c" style={{ "--d": "1.1s" } as CSSProperties} />
-        </div>
-
         <div className="gr-copy">
           <h1 className="gr-h1" aria-label={`Gracias, ${name}.`}>
             <span className="gr-hello"><Letters text="Gracias," delay={0.2} step={0.06} /></span>
@@ -68,9 +63,9 @@ export function GraciasScene() {
 
         <div className="gr-photo">
           <div className="gr-photo__in wipe-c" style={{ "--d": "1s" } as CSSProperties}>
-            <Photo slot="gracias" label="su participación en un evento" tone="conecta" circle clean className="gr-ph bite2" style={{ "--bx": "92.4%", "--by": "23.5%", "--bs": "6.8em", "--bx2": "92.4%", "--by2": "76.5%", "--bs2": "6.8em" } as CSSProperties} />
+            <Photo slot="gracias" label="su participación en un evento" tone="conecta" circle clean className="gr-ph" />
           </div>
-          {/* landscape: the pair sits on the photo's rim, in the symbol's own language: two nodes at the aperture joined by an orbit */}
+          {/* landscape: the pair sits on the photo's rim, two medallions at the aperture joined by one arc */}
           <div className="gr-link" aria-hidden="true">
             <svg viewBox="0 0 100 100" overflow="visible">
               <path className="gr-arc draw" pathLength={1} d="M92.4 23.5 Q139 50 92.4 76.5" style={{ "--d": "1.9s" } as CSSProperties} />
@@ -86,11 +81,6 @@ export function GraciasScene() {
 
   return (
     <article className="story-scene sc-gracias" data-slide-id={slide.id} aria-label={slide.title}>
-      <div className="gr-rings" aria-hidden="true">
-        <i className="gr-ring gr-ring--a wipe-c" style={{ "--d": ".9s" } as CSSProperties} />
-        <i className="gr-ring gr-ring--b wipe-c" style={{ "--d": "1.1s" } as CSSProperties} />
-      </div>
-
       <div className="gr-copy">
         <h1 className="gr-h1" aria-label={slide.title}>
           <span className="gr-big"><Letters text="Gracias" delay={0.2} step={0.065} /></span>
@@ -105,9 +95,8 @@ export function GraciasScene() {
 
       <div className="gr-photo">
         <div className="gr-photo__in wipe-c" style={{ "--d": "1s" } as CSSProperties}>
-          <Photo slot="comunidad" label="comunidad C3" tone="conecta" circle clean className="gr-ph bite" style={{ "--bx": "91.5%", "--by": "22%", "--bs": "5.2em" } as CSSProperties} />
+          <Photo slot="comunidad" label="comunidad C3" tone="conecta" circle clean className="gr-ph" />
         </div>
-        <span className="node node--conecta gr-bnode rv-s" style={{ "--nx": "91.5%", "--ny": "22%", "--ns": "4.4em", "--d": "1.9s" } as CSSProperties} />
       </div>
     </article>
   );

@@ -78,25 +78,25 @@
 .oc__sys { --sx: var(--lx); --sy: var(--ly); --sd: var(--ld); --so: var(--lo); position: absolute; left: calc(var(--sx) * 1%); top: calc(var(--sy) * 1%); width: calc(var(--sd) * 1cqw); aspect-ratio: 1; translate: -50% -50%; opacity: var(--so); transition: --sx 1.7s var(--ease), --sy 1.7s var(--ease), --sd 1.7s var(--ease), --so 1.1s ease; }
 @container rw (max-aspect-ratio: 1/1) { .oc__sys { --sx: var(--px); --sy: var(--py); --sd: var(--pd); --so: var(--po); } }
 .oc svg { width: 100%; height: 100%; overflow: visible; display: block; }
-.oc .oc-ring { fill: none; stroke: rgba(255,255,255,.2); stroke-width: 1; vector-effect: non-scaling-stroke; transition: stroke .8s; }
-.oc .oc-orbit { fill: none; stroke: rgba(255,255,255,.34); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1.2 18.43; stroke-linecap: round; }
-.oc .oc-orbit-line { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.oc .oc-trail { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linecap: round; opacity: 0; transition: opacity .9s; }
-.oc .oc-link { stroke: rgba(255,255,255,.35); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity .9s; }
+/* thin full rings, one level per dot; the level tints when its dot is the accent */
+.oc .oc-track { fill: none; stroke: rgba(255,255,255,.17); stroke-width: 1; vector-effect: non-scaling-stroke; transition: stroke .8s; }
+/* each dot turns on its own level about the symbol centre: Compite 140s, Crea 100s reversed, Conecta 70s (fastest) */
 .oc .oc-turn { transform-origin: 200px 200px; animation: rw-spin 140s linear infinite; }
-.oc .oc-turn--rev { animation-duration: 220s; animation-direction: reverse; }
+.oc .oc-orb--2 { animation-duration: 100s; animation-direction: reverse; }
+.oc .oc-orb--3 { animation-duration: 70s; }
 .oc .oc-halo { fill: var(--oc-bite, #0f203e); }
 .oc .oc-node { transform-box: fill-box; transform-origin: center; transition: transform .9s var(--out), opacity .9s; }
 .oc .oc-n1 { fill: var(--compite-l); } .oc .oc-n2 { fill: var(--crea); } .oc .oc-n3 { fill: var(--conecta-l); }
+.oc .oc-core { fill: var(--crea); }
 .oc .oc-pulse { fill: none; stroke: var(--crea); stroke-width: 1; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; opacity: 0; }
 .oc[data-acc=all] .oc-pulse, .oc[data-acc=crea] .oc-pulse { animation: oc-pulse 4.5s ease-out infinite; }
-.oc .oc-pulse:nth-of-type(2) { animation-delay: 1.5s !important; }
+.oc[data-acc=all] .oc-pulse--2, .oc[data-acc=crea] .oc-pulse--2 { animation-delay: 1.5s; }
+/* portrait: the stacked year covers the centre, so the isotipo steps aside for the teal core */
+@container rw (max-aspect-ratio: 1/1) { .oc .oc-logo { display: none; } }
 @keyframes oc-pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(7); opacity: 0; } }
 .oc[data-acc=compite] .oc-n1, .oc[data-acc=crea] .oc-n2, .oc[data-acc=conecta] .oc-n3 { transform: scale(1.7); }
 .oc[data-acc=compite] .oc-n2, .oc[data-acc=compite] .oc-n3, .oc[data-acc=crea] .oc-n1, .oc[data-acc=crea] .oc-n3, .oc[data-acc=conecta] .oc-n1, .oc[data-acc=conecta] .oc-n2 { opacity: .4; }
-.oc[data-acc=compite] .oc-trail--1, .oc[data-acc=conecta] .oc-trail--3, .oc[data-acc=all] .oc-trail { opacity: .9; }
-.oc[data-acc=conecta] .oc-link, .oc[data-acc=all] .oc-link { opacity: 1; }
-.oc[data-acc=compite] .oc-ring { stroke: rgba(111,160,221,.5); } .oc[data-acc=crea] .oc-ring--in { stroke: rgba(51,190,172,.55); } .oc[data-acc=conecta] .oc-orbit { stroke: rgba(154,164,224,.7); }
+.oc[data-acc=compite] .oc-track--1 { stroke: rgba(111,160,221,.5); } .oc[data-acc=crea] .oc-track--2 { stroke: rgba(51,190,172,.55); } .oc[data-acc=conecta] .oc-track--3 { stroke: rgba(154,164,224,.7); }
 .oc--static .oc-turn, .oc--static .oc-pulse { animation: none !important; }
 .is-paused .oc-turn { animation-play-state: paused; }
 .reduce-motion .oc__sys { transition: none; }

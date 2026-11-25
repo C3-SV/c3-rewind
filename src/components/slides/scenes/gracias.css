@@ -1,5 +1,5 @@
-/* ===== GRACIAS — palabra gigante enmascarada + foto circular con mordisco =====
-   The orbit field (pose gracias: centre 80% / 52%, 44cqw) circles the photo, so the photo sits at the same centre. */
+/* ===== GRACIAS — palabra gigante enmascarada + foto circular, concéntrica con el campo orbital =====
+   The orbit field (pose gracias: centre 80% / 52%, 56cqw) is concentric with the photo, and its innermost level clears the photo's rim. */
 .sc-gracias { --gx: 4.4em; overflow: clip; }
 
 /* ---------- copy ---------- */
@@ -17,21 +17,12 @@
 .sc-gracias .gr-year { font-style: normal; color: var(--crea); }
 .sc-gracias .gr-para { font: 400 1.5em/1.55 var(--font-poppins, Poppins), sans-serif; color: #dfe7f3; max-width: 27em; margin: 1.3em 0 0 .15em; }
 
-/* ---------- photo (circle, iris reveal, node bite) ---------- */
-.sc-gracias .gr-photo { position: absolute; left: 80%; top: 52%; width: 28em; aspect-ratio: 1; translate: -50% -50%; z-index: 1; }
+/* ---------- photo (circle, iris reveal; the orbit field is drawn around it) ---------- */
+.sc-gracias .gr-photo { position: absolute; left: 80%; top: 52%; width: 22em; aspect-ratio: 1; translate: -50% -50%; z-index: 1; }
 .sc-gracias .gr-photo__in { position: absolute; inset: 0; }
 .sc-gracias .gr-ph { position: absolute; inset: 0; box-shadow: 0 2em 5em rgba(4,10,24,.45); }
-.sc-gracias .gr-photo > .node { z-index: 3; }
-.sc-gracias .gr-bnode { box-shadow: 0 0 1.8em color-mix(in srgb, var(--conecta-l) 60%, transparent); }
-.is-active .sc-gracias .gr-bnode::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--conecta-l); animation: gr-ping 4.5s ease-out 2.6s infinite; }
-@keyframes gr-ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(3.4); opacity: 0; } }
-.sc-gracias .gr-rings { position: absolute; left: 80%; top: 52%; width: 0; height: 0; z-index: 0; }
-.sc-gracias .gr-ring { position: absolute; left: 0; top: 0; translate: -50% -50%; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); }
-.sc-gracias .gr-ring--a { width: 33em; aspect-ratio: 1; }
-.sc-gracias .gr-ring--b { width: 47em; aspect-ratio: 1; border-color: rgba(154,164,224,.18); border-style: dashed; }
 
 /* ---------- company variant: «Gracias, <Empresa>.» ---------- */
-.sc-gracias.is-company .gr-photo { width: 25em; }
 .sc-gracias.is-company .gr-copy { width: 60em; justify-content: center; }
 .sc-gracias.is-company .gr-hello { font-size: 6em; line-height: 1; margin-left: -.02em; color: #fff; }
 .sc-gracias.is-company .gr-name { display: block; font-size: min(17em, calc(60em / (var(--n) * .64 + .5))); line-height: .9; margin: .02em 0 0 -.04em; text-wrap: balance; max-width: 60em; }
@@ -45,12 +36,12 @@
 .sc-gracias.is-company .gr-welcome--pending { font-size: 1.1em; color: var(--soft); }
 .sc-gracias.is-company .gr-closing { font: 600 1.7em/1.35 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.01em; color: #fff; margin: 0; max-width: 21em; }
 
-/* the pair on the rim (landscape) */
+/* the pair on the rim (landscape): positions are in the photo's own %, so they follow its size */
 .sc-gracias .gr-link { position: absolute; inset: 0; pointer-events: none; }
 .sc-gracias .gr-link svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .sc-gracias .gr-arc { fill: none; stroke: rgba(255,255,255,.72); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .sc-gracias .gr-link__node { position: absolute; left: 115.7%; top: 50%; width: 1.5em; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--crea); box-shadow: 0 0 0 .5em rgba(15,32,62,.9), 0 0 1.6em var(--crea); }
-.sc-gracias .gr-slot { position: absolute; width: 6.6em; aspect-ratio: 1; translate: -50% -50%; left: 92.4%; }
+.sc-gracias .gr-slot { position: absolute; width: 5.4em; aspect-ratio: 1; translate: -50% -50%; left: 92.4%; }
 .sc-gracias .gr-slot--a { top: 23.5%; } .sc-gracias .gr-slot--b { top: 76.5%; }
 .sc-gracias .gr-medal { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #fff; box-shadow: 0 .8em 2em rgba(4,10,24,.4); }
 .sc-gracias .gr-medal img { width: 100%; height: 100%; object-fit: cover; }
@@ -66,14 +57,9 @@
   .sc-gracias .gr-big { font-size: min(9.1em, 22cqw); }
   .sc-gracias .gr-tail { font-size: 2.45em; margin-top: .5em; }
   .sc-gracias .gr-para { font-size: 1.22em; margin-top: .9em; max-width: 29em; }
-  .sc-gracias .gr-photo { left: auto; right: -2.2em; top: auto; bottom: 7.4em; translate: none; width: min(25em, 33cqh); }
-  .sc-gracias .gr-rings { left: auto; right: 0; top: auto; bottom: 0; }
-  .sc-gracias .gr-ring--a { translate: -10.5em -10.5em; width: 31em; }
-  .sc-gracias .gr-ring--b { translate: -10.5em -10.5em; width: 43em; }
-  .sc-gracias .gr-rings { left: calc(100% - 8em); top: calc(100% - 17em); right: auto; bottom: auto; }
-  .sc-gracias .gr-ring--a, .sc-gracias .gr-ring--b { translate: -50% -50%; }
+  /* the photo sits on the same centre as the orbit field (pose gracias, portrait: 84% / 78%) */
+  .sc-gracias .gr-photo { left: 76%; top: 80%; translate: -50% -50%; width: 44cqw; }
   /* company */
-  .sc-gracias.is-company .gr-photo { width: min(19em, 26cqh); right: -1.4em; }
   .sc-gracias.is-company .gr-copy { width: auto; }
   .sc-gracias.is-company .gr-hello { font-size: 4.3em; }
   .sc-gracias.is-company .gr-name { font-size: min(14em, calc(33em / (var(--n) * .64 + .5))); max-width: none; }

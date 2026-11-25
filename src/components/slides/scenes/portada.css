@@ -22,6 +22,7 @@
 
 /* ---------- grid: top bar + hero ---------- */
 .sc-portada .pt-grid { position: absolute; left: 0; right: 0; top: 0; bottom: 17.2em; display: grid; grid-template-rows: auto 1fr; padding: 3em var(--pt-x) 0; z-index: 2; }
+.sc-portada:not(.is-company) .pt-grid { grid-template-rows: 1fr; }
 .sc-portada .pt-top { display: flex; align-items: center; gap: 1.4em; min-height: 4.6em; }
 .sc-portada .pt-lockup { height: 4.4em; width: auto; }
 .sc-portada .pt-x { font: 600 1.7em/1 var(--font-montserrat, Montserrat), sans-serif; color: rgba(255,255,255,.5); }

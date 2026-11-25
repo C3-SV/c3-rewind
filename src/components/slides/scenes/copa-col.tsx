@@ -56,7 +56,7 @@ export function CopaColScene() {
             const col = i % 4, row = Math.floor(i / 4);
             const sd = 0.5 + i * 0.07; // tile leaves the centre
             const bite = BITES[i];
-            const style: Record<string, string | number> = { "--i": i, "--ox": 1.5 - col, "--oy": 1 - row, "--sd": `${sd.toFixed(2)}s`, "--rt": `${(i % 2 ? 1 : -1) * (10 + (i % 3) * 6)}deg` };
+            const style: Record<string, string | number> = { "--i": i, "--ox": 1.5 - col, "--oy": 1 - row, "--cc-sd": `${sd.toFixed(2)}s`, "--rt": `${(i % 2 ? 1 : -1) * (10 + (i % 3) * 6)}deg` };
             let body;
             if (cell.kind === "code") {
               const fs = 1.9 + k * 0.16; // judge flips the tile
@@ -73,9 +73,10 @@ export function CopaColScene() {
               );
             } else {
               style["--pd"] = `${(2.3 + (i % 5) * 0.14).toFixed(2)}s`;
-              body = <Photo slot={cell.slot} label={cell.label} tone={cell.tone} className="cc-photo" />;
+              const capTop = bite?.by === "100%" ? " cc-photo--cap-top" : "";
+              body = <Photo slot={cell.slot} label={cell.label} tone={cell.tone} className={`cc-photo${capTop}`} />;
             }
-            if (bite) { style["--bx"] = bite.bx; style["--by"] = bite.by; style["--bs"] = "3.4em"; style["--nx"] = bite.bx; style["--ny"] = bite.by; style["--nc"] = bite.nc; style["--ns"] = "2.9em"; style["--nd"] = `${(sd + 1.4).toFixed(2)}s`; }
+            if (bite) { style["--bx"] = bite.bx; style["--by"] = bite.by; style["--nx"] = bite.bx; style["--ny"] = bite.by; style["--nc"] = bite.nc; style["--nd"] = `${(sd + 1.4).toFixed(2)}s`; }
             return (
               <div className={`cc-slot cc-slot--${cell.kind}${cell.kind === "code" ? ` cc-t-${cell.tone}` : ""}`} key={i} style={style as CSSProperties}>
                 <div className={`cc-card${bite ? " bite" : ""}`}>{body}</div>

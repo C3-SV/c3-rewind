@@ -474,6 +474,28 @@
         "y": 35
       },
       "private": false
+    },
+    "grupo": {
+      "provider": "local",
+      "src": "/photos/equipo-c3.jpg",
+      "alt": "Equipo C3 en la Copa Salvadoreña de Programación 2026",
+      "status": "preliminary",
+      "focalPoint": {
+        "x": 50,
+        "y": 38
+      },
+      "private": false
+    },
+    "reel4": {
+      "provider": "local",
+      "src": "/photos/equipo-c3.jpg",
+      "alt": "Equipo C3 en la Copa Salvadoreña de Programación 2026",
+      "status": "preliminary",
+      "focalPoint": {
+        "x": 50,
+        "y": 38
+      },
+      "private": false
     }
   }
 }

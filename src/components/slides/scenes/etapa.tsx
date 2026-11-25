@@ -108,7 +108,7 @@ export function EtapaScene() {
               style={{ "--arr": `${arrive.toFixed(2)}s`, "--i": i } as CSSProperties}>
               <span className="et-id" aria-hidden="true">
                 <i className="et-ringc" />
-                <i className="et-en" data-en={i} />
+                <i className="et-en" data-en={i}><img src={`/brand/${l.key}.png`} alt="" draggable={false} /></i>
               </span>
               <span className="et-name"><span className="ln"><span style={{ "--d": `${(arrive + 0.05).toFixed(2)}s` } as CSSProperties}>{l.name}</span></span></span>
               <span className="et-def rv" style={{ "--d": `${(arrive + 0.35).toFixed(2)}s` } as CSSProperties}>{l.def}</span>

@@ -66,7 +66,7 @@ export function PortadaScene() {
   const cls = (w: string) => ({ competencia: "compite", creación: "crea", conexión: "conecta" } as Record<string, string>)[w.toLowerCase()];
 
   return (
-    <article className="story-scene sc-portada" data-slide-id={slide.id} aria-label={slide.title}>
+    <article className={`story-scene sc-portada${recipient ? " is-company" : ""}`} data-slide-id={slide.id} aria-label={slide.title}>
       {/* depth: ring typography around the orbit field + light sweep + breathing glow behind the final digit */}
       <div className="pt-depth" aria-hidden="true">
         <div className="pt-ring rv-f" style={{ "--d": ".35s" } as CSSProperties}><RingType /></div>
@@ -75,17 +75,16 @@ export function PortadaScene() {
       </div>
 
       <div className="pt-grid">
-        <header className="pt-top rv-l" style={{ "--d": ".1s" } as CSSProperties}>
-          <img className="pt-lockup" src="/brand/lockup.png" alt="C3" />
-          {recipient && (
-            <>
-              <span className="pt-x" aria-hidden="true">×</span>
-              {partnerLogo
-                ? <span className="pt-co pt-co--logo"><img src={partnerLogo} alt={name} /></span>
-                : <span className="pt-co pt-co--mono"><i aria-hidden="true">{monogram(name)}</i><b>{name}</b></span>}
-            </>
-          )}
-        </header>
+        {/* co-branding only: without a recipient the C3 mark lives at the centre of the orbit */}
+        {recipient && (
+          <header className="pt-top rv-l" style={{ "--d": ".1s" } as CSSProperties}>
+            <img className="pt-lockup" src="/brand/lockup.png" alt="C3" />
+            <span className="pt-x" aria-hidden="true">×</span>
+            {partnerLogo
+              ? <span className="pt-co pt-co--logo"><img src={partnerLogo} alt={name} /></span>
+              : <span className="pt-co pt-co--mono"><i aria-hidden="true">{monogram(name)}</i><b>{name}</b></span>}
+          </header>
+        )}
 
         <div className="pt-hero">
           <p className="kicker pt-kicker rv" style={{ "--d": ".22s" } as CSSProperties}>

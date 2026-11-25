@@ -88,12 +88,6 @@
 .is-active .d7-it--soon .d7-badge::after { animation: d7-shimmer 3.6s ease-in-out calc(var(--t0) + 1.2s) infinite; }
 @keyframes d7-shimmer { 0% { translate: -110% 0; } 55%, 100% { translate: 110% 0; } }
 
-/* the line itself: leaves a clear gap round each badge, like the symbol's halo */
-.d7-it::after { content: ""; position: absolute; z-index: 1; top: 4.2em; height: 1px; left: calc(var(--bw) + 1em); right: calc(1em - var(--g)); background: rgba(255,255,255,.3); transform-origin: 0 50%; }
-.d7-it:last-child::after { right: -6em; background: repeating-linear-gradient(90deg, rgba(255,255,255,.4) 0 .5em, transparent .5em 1em); -webkit-mask-image: linear-gradient(90deg, #000 20%, transparent); mask-image: linear-gradient(90deg, #000 20%, transparent); }
-.is-active .d7-it::after { animation: d7-line 1s var(--ease) calc(var(--t0) + .55s) backwards; }
-@keyframes d7-line { from { transform: scaleX(0); } }
-
 .is-active .d7-badge { animation: d7-fly 1.25s var(--spring) var(--t0) backwards; }
 @keyframes d7-fly { 0% { translate: var(--fx) var(--fy); scale: .25; opacity: 0; } 18% { opacity: 1; } 100% { translate: 0 0; scale: 1; } }
 .is-active .d7-txt { animation: rw-rise 1s var(--out) calc(var(--t0) + .55s) backwards; }
@@ -122,7 +116,6 @@
   .d7-list { grid-template-columns: 1fr 1fr; row-gap: 1.6em; }
   .d7-it { --bw: 5em; row-gap: 1em; }
   .d7-it--soon { --bw: 4.2em; }
-  .d7-it::after { display: none; }
   .d7-badge { margin-top: 0; }
   .d7-name { font-size: 1.45em; } .d7-it--soon .d7-name { font-size: 1.15em; }
   .d7-blurb, .d7-sil { display: none; }
@@ -151,11 +144,6 @@
   .d7-tag { margin-top: .6em; }
   .d7-blurb { margin-top: .3em; font-size: 1em; }
   .d7-sil { margin-top: .8em; }
-  /* vertical orbit line between badges */
-  .d7-it::after { top: calc(var(--bw) + .8em); bottom: calc(.8em - 1.7em); height: auto; width: 1px; left: calc(var(--bw) / 2); right: auto; transform-origin: 50% 0; }
-  .d7-it:last-child::after { display: none; }
-  .is-active .d7-it::after { animation-name: d7-line-y; }
   .d7-it:nth-child(1) { --fx: 26em; --fy: -26em; } .d7-it:nth-child(2) { --fx: 26em; --fy: -33em; }
   .d7-it:nth-child(3) { --fx: 26em; --fy: -40em; } .d7-it:nth-child(4) { --fx: 26em; --fy: -46em; }
 }
-@keyframes d7-line-y { from { transform: scaleY(0); } }

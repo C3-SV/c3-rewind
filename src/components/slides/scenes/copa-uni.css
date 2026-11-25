@@ -4,11 +4,13 @@
   grid-template-areas: "photo . copy" "quote . copy"; }
 
 /* ---- giant scoreboard layer (graphic language, not data) ---- */
-.cu-sb { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, 1fr); pointer-events: none; overflow: hidden; }
+/* calm backdrop: the layer fades out before the copy column so no dot sits behind the text */
+.cu-sb { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, 1fr); pointer-events: none; overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, #000 0, #000 44%, transparent 60%); mask: linear-gradient(90deg, #000 0, #000 44%, transparent 60%); }
 .cu-sbc { display: flex; flex-direction: column; align-items: center; gap: 5.2em; padding-top: .2em; }
-.cu-sbl { height: .86em; font: 900 9.6em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.05em; color: var(--compite-l); opacity: .1; }
-.cu-d { flex: none; width: 1.6em; aspect-ratio: 1; border-radius: 50%; border: .12em solid rgba(255,255,255,.2); }
-.cu-d.is-s { background: var(--dc); border-color: var(--dc); opacity: .42; box-shadow: 0 0 1.1em var(--dc); }
+.cu-sbl { height: .86em; font: 900 9.6em/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.05em; color: var(--compite-l); opacity: .055; }
+.cu-d { flex: none; width: 1.6em; aspect-ratio: 1; border-radius: 50%; border: .12em solid rgba(255,255,255,.08); }
+.cu-d.is-s { background: var(--dc); border-color: var(--dc); opacity: .16; }
 .cu-sbnote { position: absolute; left: 9em; bottom: 1.6em; font: 500 max(10px, .72em) var(--font-poppins, Poppins), sans-serif; color: var(--soft); opacity: .6; }
 
 /* ---- protagonist photo: bleeds off the left edge, notched by two nodes ---- */
@@ -52,7 +54,7 @@
 .is-active .cu-sbl { animation: rw-fade 1.4s ease var(--cd) backwards; }
 .is-active .cu-d { animation: rw-pop .8s var(--spring) var(--dd) backwards; }
 .is-active .cu-d.is-s { animation: rw-pop .8s var(--spring) var(--dd) backwards, cu-breathe 7s ease-in-out calc(var(--dd) + 3s) infinite; }
-@keyframes cu-breathe { 50% { opacity: .75; } }
+@keyframes cu-breathe { 50% { opacity: .26; } }
 .is-active .cu-iris { animation: cu-iris 1.9s var(--ease) .3s backwards; }
 @keyframes cu-iris { from { clip-path: circle(0% at var(--fx, 70%) var(--fy, 45%)); } }
 .is-active .cu-ring { animation: cu-ring 2s var(--out) .45s backwards; }
@@ -72,7 +74,7 @@
 @container rw (max-aspect-ratio: 1/1) {
   .sc-copa-uni { --ts: 3.95em; display: flex; flex-direction: column; align-items: stretch; padding: 5.6em 2.2em 6.6em; overflow: hidden auto; }
   .cu-sb { -webkit-mask: linear-gradient(180deg, #000 0, #000 7%, transparent 11%); mask: linear-gradient(180deg, #000 0, #000 7%, transparent 11%); }
-  .cu-sbl { font-size: 5em; height: .84em; opacity: .08; }
+  .cu-sbl { font-size: 5em; height: .84em; opacity: .055; }
   .cu-copy::before { display: none; }
   .cu-sbnote { display: none; }
   .cu-copy { display: contents; }
