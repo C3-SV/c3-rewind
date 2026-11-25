@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+dist/
+.vercel/
+.gitdata/
+coverage/
+playwright-report/
+test-results/
+debug.log
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+src/server/private/recipients.local.json
