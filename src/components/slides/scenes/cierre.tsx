@@ -52,8 +52,6 @@ function Symbol() {
         <path className="cl-c draw" d={`M${END_A.x} ${END_A.y} A130 130 0 1 1 ${END_B.x} ${END_B.y}`} pathLength={1} fill="none" strokeWidth="90" style={{ "--d": ".45s" } as CSSProperties} />
       </g>
       {/* the three lines */}
-      <circle className="cl-pulse" cx="200" cy="200" r="44" />
-      <circle className="cl-pulse cl-pulse--2" cx="200" cy="200" r="44" />
       <circle className="cl-n cl-n2" cx="200" cy="200" r="44" />
       <circle className="cl-n cl-n1" cx={BLUE.x} cy={BLUE.y} r="44" />
       <circle className="cl-n cl-n3" cx={PURPLE.x} cy={PURPLE.y} r="44" />

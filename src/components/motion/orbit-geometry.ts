@@ -8,7 +8,7 @@
 export const OC = {
   box: 400, c: 200,
   rCompite: 105, rCrea: 145, rConecta: 185,
-  core: 10, node: 13, halo: 19, logo: 120,
+  core: 8, node: 10, halo: 15, logo: 120,
   /* legacy values used by the scene compositions that draw their own C (etapa, cierre, somos36-art) */
   rOut: 175, rIn: 85, rOrbit: 150,
   aperture: 40, nodeAngle: 27,
@@ -48,6 +48,6 @@ export const POSES: Record<string, Pose> = {
   somos36: P([93, 12, 24, 0.75], [86, 9, 56, 0.6]),
   voces: P([94, 12, 26, 0.65], [88, 8, 58, 0.45]),
   dos7: P([94, 14, 30, 0.7], [88, 10, 60, 0.5], "all"),
-  cierre: P([50, 28, 32, 1], [50, 22, 96, 0.9], "all"),
+  cierre: P([50, 28, 32, 0], [50, 22, 96, 0], "all"), // the scene draws its own symbol; the shared field's big dots step aside
 };
 export const DEFAULT_POSE: Pose = P([92, 14, 30, 0.4], [88, 10, 56, 0.3]);

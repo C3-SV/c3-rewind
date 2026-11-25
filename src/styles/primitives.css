@@ -88,15 +88,11 @@
 .oc .oc-node { transform-box: fill-box; transform-origin: center; transition: transform .9s var(--out), opacity .9s; }
 .oc .oc-n1 { fill: var(--compite-l); } .oc .oc-n2 { fill: var(--crea); } .oc .oc-n3 { fill: var(--conecta-l); }
 .oc .oc-core { fill: var(--crea); }
-.oc .oc-pulse { fill: none; stroke: var(--crea); stroke-width: 1; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; opacity: 0; }
-.oc[data-acc=all] .oc-pulse, .oc[data-acc=crea] .oc-pulse { animation: oc-pulse 4.5s ease-out infinite; }
-.oc[data-acc=all] .oc-pulse--2, .oc[data-acc=crea] .oc-pulse--2 { animation-delay: 1.5s; }
 /* portrait: the stacked year covers the centre, so the isotipo steps aside for the teal core */
 @container rw (max-aspect-ratio: 1/1) { .oc .oc-logo { display: none; } }
-@keyframes oc-pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(7); opacity: 0; } }
 .oc[data-acc=compite] .oc-n1, .oc[data-acc=crea] .oc-n2, .oc[data-acc=conecta] .oc-n3 { transform: scale(1.7); }
 .oc[data-acc=compite] .oc-n2, .oc[data-acc=compite] .oc-n3, .oc[data-acc=crea] .oc-n1, .oc[data-acc=crea] .oc-n3, .oc[data-acc=conecta] .oc-n1, .oc[data-acc=conecta] .oc-n2 { opacity: .4; }
 .oc[data-acc=compite] .oc-track--1 { stroke: rgba(111,160,221,.5); } .oc[data-acc=crea] .oc-track--2 { stroke: rgba(51,190,172,.55); } .oc[data-acc=conecta] .oc-track--3 { stroke: rgba(154,164,224,.7); }
-.oc--static .oc-turn, .oc--static .oc-pulse { animation: none !important; }
+.oc--static .oc-turn { animation: none !important; }
 .is-paused .oc-turn { animation-play-state: paused; }
 .reduce-motion .oc__sys { transition: none; }

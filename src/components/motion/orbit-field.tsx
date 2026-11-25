@@ -40,12 +40,6 @@ export function OrbitSymbol({ nodes = true, logo = false }: { nodes?: boolean; l
           </g>
         );
       })}
-      {nodes && !logo && (
-        <>
-          <circle className="oc-pulse" cx={OC.c} cy={OC.c} r={OC.core} />
-          <circle className="oc-pulse oc-pulse--2" cx={OC.c} cy={OC.c} r={OC.core} />
-        </>
-      )}
       {/* the core is drawn under the isotipo, so the isotipo hides it wherever the logo is shown */}
       {nodes && <circle className="oc-node oc-core" cx={OC.c} cy={OC.c} r={OC.core} />}
       {logo && (
