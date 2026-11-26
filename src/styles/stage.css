@@ -116,3 +116,10 @@
   .rw-nb, .rw-notes-btn, .ibtn { backdrop-filter: none !important; }
   .rw-page * { backdrop-filter: none !important; }
 }
+
+/* The general experience fills the screen; the artwork keeps its intended scale. */
+.is-general .experience-stage { width: 100vw; height: 100dvh; aspect-ratio: auto; }
+@container rw (min-aspect-ratio: 1/1) {
+  .is-general .experience-slide { --u: min(1cqw, 1.7778cqh); }
+  .is-general .rw-fg { left: 0; right: 0; width: min(100%, 177.78cqh); margin-inline: auto; }
+}

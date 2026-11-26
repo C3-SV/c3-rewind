@@ -46,3 +46,8 @@ La versión general tiene 13 diapositivas. `huella` es la diapositiva 14, exclus
 - Fuente visual y lista nominal de slots: [`docs/art-direction.md`](art-direction.md).
 - Revisión editorial/publicación y comandos de validación: [`docs/editorial-checklist.md`](editorial-checklist.md).
 - Estados detallados de copy, bloques, hechos y fotos: [`src/content/2026/general.json`](../src/content/2026/general.json).
+
+## Refinamiento de la experiencia general
+
+- Aprobar la invitación «¿Creamos la próxima experiencia juntos?», el agradecimiento final y el arte `public/rewind-2026.png`, incluido el uso de la marca. El contenido continúa en revisión y no autoriza su publicación definitiva.
+- La variante oscura oficial del isotipo para el botón de visita fue proporcionada; confirmar su uso editorial junto con los demás recursos de marca.

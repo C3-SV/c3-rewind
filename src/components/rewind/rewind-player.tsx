@@ -48,7 +48,7 @@ export function RewindPlayer({ slides, edition, photos, imageKitEndpoint, recipi
   const stableActions = useRef({ next: () => actions.current.next(), home: () => actions.current.home(), jump: (id: string) => actions.current.jump(id) }).current;
 
   return (
-    <main className={`rewind-app is-live${p.paused || p.reducedMotion ? " is-paused" : ""}${fullscreen ? " is-fullscreen" : ""}`}>
+    <main className={`rewind-app is-live${recipient ? "" : " is-general"}${p.paused || p.reducedMotion ? " is-paused" : ""}${fullscreen ? " is-fullscreen" : ""}`}>
       <div
         ref={stageRef}
         className={`experience-stage${p.reducedMotion || p.paused ? " reduce-motion" : ""}`}

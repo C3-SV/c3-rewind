@@ -156,3 +156,21 @@ test("same-document fragments and browser back restore the requested scene", asy
   await page.evaluate(() => { window.location.hash = ""; });
   await expect(page.locator(".experience-slide.is-active [data-slide-id]")).toHaveAttribute("data-slide-id", "portada");
 });
+
+test("general stage fills wide screens and offers downloadable artwork on demand", async ({ page }) => {
+  await page.setViewportSize({ width: 2560, height: 1080 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/2026#cierre");
+  const stage = await page.locator(".experience-stage").boundingBox();
+  expect(stage?.width).toBe(2560);
+  expect(stage?.height).toBe(1080);
+  const logo = page.locator(".experience-slide.is-active .cl-go__logo");
+  await expect(logo).toHaveAttribute("src", "/brand/iso-dark.png");
+  await expect.poll(() => logo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(page.locator(".share-art__panel")).toHaveCount(0);
+  await page.getByRole("button", { name: "Arte para compartir" }).click();
+  await expect(page.getByAltText(/C3 Rewind 2026/)).toBeVisible();
+  const download = page.waitForEvent("download");
+  await page.getByRole("link", { name: "Descargar arte" }).click();
+  expect((await download).suggestedFilename()).toBe("c3-rewind-2026.png");
+});

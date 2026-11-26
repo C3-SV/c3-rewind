@@ -112,3 +112,11 @@
   .cl-partner { left: 84%; top: 90%; }
   .cl-ghost { font-size: 31em; top: 12em; }
 }
+
+.cl-go__logo { width: 1.8em; height: 1.8em; object-fit: contain; }
+.share-art { position: relative; margin-top: .6em; }
+.share-art__panel { position: absolute; bottom: 100%; left: 50%; translate: -50% 0; width: min(25em, 80vw); padding: 1em; background: #10203e; border: 1px solid rgba(255,255,255,.3); border-radius: 1em; box-shadow: 0 .8em 2em #071022aa; }
+.share-art__panel img { display: block; width: min(100%, 16em); margin: 0 auto .7em; border-radius: .4em; }
+.share-art__actions { display: flex; justify-content: center; flex-wrap: wrap; }
+.share-art__error { color: #fff; font-size: 1em; }
+@container rw (max-aspect-ratio: 3/5) { .is-general .sc-cierre { --sym: 17em; padding-top: 5.5em; } .is-general .cl-chips { margin-top: 1em; } .is-general .cl-h { font-size: 3em; } .is-general .cl-msg { margin-top: .4em; } .is-general .cl-social { display: none; } }

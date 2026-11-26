@@ -67,7 +67,7 @@ function FlipCard({ from, to, i }: { from: string; to: string; i: number }) {
 }
 
 export function Dos7Scene() {
-  const { slide, showDraft } = useScene();
+  const { slide, edition, showDraft, recipient } = useScene();
   const m = slide.title.match(/^(\d{4})\s+(.*)$/);
   const year = m?.[1] ?? "2027";
   const rest = m?.[2] ?? slide.title;
@@ -128,6 +128,7 @@ export function Dos7Scene() {
       ) : slide.body ? (
         <p className="d7-body rv" style={{ "--d": "3s" } as CSSProperties}>{slide.body}</p>
       ) : null}
+      {!recipient && edition === "2026" && <aside className="d7-invite"><strong>¿Creamos la próxima experiencia juntos?</strong><span>Estamos abiertos a nuevas ideas, retos, eventos y colaboraciones.</span></aside>}
     </article>
   );
 }

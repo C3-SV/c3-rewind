@@ -5,6 +5,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { OC, polar } from "../../motion/orbit-geometry.ts";
 import { Icon, LineChip, monogram } from "../primitives.tsx";
 import { useScene } from "../scene-context.tsx";
+import { ShareArt } from "./share-art.tsx";
 import { splitClosingMessage } from "../../../lib/closing-message.ts";
 
 const SAFE_DEST = /^(?:https:\/\/|mailto:)\S+$/;
@@ -59,16 +60,18 @@ function emphasizeYear(title: string): ReactNode[] {
 }
 
 export function CierreScene() {
-  const { slide, recipient, partnerLogo, pdfHref, hidePdf, home } = useScene();
-  const { body, sign } = splitClosingMessage(recipient?.closingMessage?.trim() || slide.body || "");
+  const { slide, edition, recipient, partnerLogo, pdfHref, hidePdf, home, staticMode } = useScene();
+  const general2026 = !recipient && edition === "2026";
+  const { body, sign } = general2026 ? { body: "Gracias por construir este año con nosotros.", sign: "" } : splitClosingMessage(recipient?.closingMessage?.trim() || slide.body || "");
+  const title = general2026 ? "Gracias por ser parte." : slide.title;
   const dest = recipient ? (recipient.contactDestination && SAFE_DEST.test(recipient.contactDestination) ? recipient.contactDestination : null) : SITE;
   const label = recipient ? "Conversemos" : "Visitar c3.com.sv";
   const external = dest?.startsWith("https://");
   const printContact = recipient ? (dest ? dest.replace(/^mailto:/, "") : null) : "c3.com.sv";
 
   return (
-    <article className="story-scene sc-cierre" data-slide-id={slide.id} aria-label={slide.title}>
-      <div className="cl-ghost" aria-hidden="true">2027</div>
+    <article className="story-scene sc-cierre" data-slide-id={slide.id} aria-label={title}>
+      {!general2026 && <div className="cl-ghost" aria-hidden="true">2027</div>}
 
       <div className="cl-sym">
         <span className="cl-glow" aria-hidden="true" />
@@ -87,8 +90,8 @@ export function CierreScene() {
         <span className="cl-chip cl-chip--3"><LineChip line="conecta">Conecta</LineChip></span>
       </div>
 
-      <h1 className="cl-h" aria-label={slide.title}>
-        {emphasizeYear(slide.title).map((line, i) => (
+      <h1 className="cl-h" aria-label={title}>
+        {emphasizeYear(title).map((line, i) => (
           <span className="ln cl-ln" key={i} aria-hidden="true"><span style={{ "--d": `${(2.05 + i * 0.2).toFixed(2)}s` } as CSSProperties}>{line}</span></span>
         ))}
       </h1>
@@ -101,7 +104,7 @@ export function CierreScene() {
         <div className="cl-bar">
           {dest && (
             <a className="cl-go" href={dest} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-              <span className="cl-go__node" aria-hidden="true" />
+              {recipient ? <span className="cl-go__node" aria-hidden="true" /> : <img className="cl-go__logo" src="/brand/iso-dark.png" alt="" />}
               {label}
               <Icon name={recipient ? "msg" : "arrow"} />
             </a>
@@ -109,6 +112,7 @@ export function CierreScene() {
           <button type="button" className="cl-sec" onClick={home}><Icon name="restart" />Volver al inicio</button>
           {!hidePdf && <a className="cl-sec" href={pdfHref} download><Icon name="download" />Descargar PDF</a>}
         </div>
+        {general2026 && !staticMode && <ShareArt />}
         <div className="cl-social">
           <a href={SITE} target="_blank" rel="noopener noreferrer"><Icon name="globe" />c3.com.sv</a>
           <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer"><Icon name="insta" />@c3.elsalvador</a>
