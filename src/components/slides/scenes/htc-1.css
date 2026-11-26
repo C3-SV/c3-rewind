@@ -111,3 +111,15 @@
 @container rw (min-aspect-ratio: 1/1) {
   .sc-htc-1 .h1-route--p { display: none; }
 }
+
+/* Additional editorial photo slots follow the existing reveal. */
+.sc-htc-1 .h1-extra { position: absolute; z-index: 3; top: 7.4em; right: 3em; width: 12em; display: grid; gap: 1em; }
+.sc-htc-1 .h1-extra__photo { height: 9.6em; }
+.is-active .sc-htc-1 .h1-extra__photo { animation: rw-rise 1s var(--out) 4.8s backwards; }
+.is-active .sc-htc-1 .h1-extra__photo + .h1-extra__photo { animation-delay: 5.2s; }
+@container rw (min-aspect-ratio: 1/1) and (max-aspect-ratio: 2/1) { .sc-htc-1:has(.h1-extra) .h1-pn--2 { --w: 30; } }
+@container rw (max-aspect-ratio: 1/1) {
+  .sc-htc-1 .h1-cluster:has(.h1-extra) { height: 39em; }
+  .sc-htc-1 .h1-extra { top: 28em; left: 1.6em; right: 1.6em; width: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sc-htc-1 .h1-extra__photo { height: 9.5em; }
+}

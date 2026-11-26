@@ -128,7 +128,7 @@ export function Dos7Scene() {
       ) : slide.body ? (
         <p className="d7-body rv" style={{ "--d": "3s" } as CSSProperties}>{slide.body}</p>
       ) : null}
-      {!recipient && edition === "2026" && <aside className="d7-invite"><strong>¿Creamos la próxima experiencia juntos?</strong><span>Estamos abiertos a nuevas ideas, retos, eventos y colaboraciones.</span></aside>}
+      {!recipient && edition === "2026" && <aside className="d7-invite rv" style={{ "--d": `${(4.5 + Math.max(0, initiatives.length - 1) * 0.62).toFixed(2)}s` } as CSSProperties}><strong>¿Creamos la próxima experiencia juntos?</strong><span>Estamos abiertos a nuevas ideas, retos, eventos y colaboraciones.</span></aside>}
     </article>
   );
 }

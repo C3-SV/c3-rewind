@@ -148,7 +148,13 @@
   .d7-it:nth-child(3) { --fx: 26em; --fy: -40em; } .d7-it:nth-child(4) { --fx: 26em; --fy: -46em; }
 }
 
-.d7-invite { position: absolute; z-index: 3; right: 6em; bottom: 4.3em; display: flex; flex-direction: column; gap: .35em; max-width: 34em; padding: 1.1em 1.5em; border-radius: 1em; background: #33beac; color: #0c1830; text-align: left; }
+.d7-invite { position: absolute; z-index: 3; right: 6em; top: 20.5em; display: flex; flex-direction: column; gap: .35em; max-width: 34em; padding: 1.1em 1.5em; border-radius: 1em; background: #33beac; color: #0c1830; text-align: left; }
 .d7-invite strong { font: 800 1.3em/1.2 var(--font-montserrat, Montserrat), sans-serif; }
 .d7-invite span { font: 500 1em/1.35 var(--font-poppins, Poppins), sans-serif; }
-@container rw (max-aspect-ratio: 1/1) { .d7-invite { right: 2.4em; left: 2.4em; bottom: 8.2em; max-width: none; padding: .8em 1em; } .d7-invite strong { font-size: 1.1em; } .d7-invite span { font-size: .9em; } }
+@container rw (max-aspect-ratio: 1/1) { .d7-invite { top: auto; right: 2.4em; left: 2.4em; bottom: 8.2em; max-width: none; padding: .8em 1em; } .d7-invite strong { font-size: 1.1em; } .d7-invite span { font-size: .9em; } }
+
+@container rw (max-aspect-ratio: 1/1) and (min-aspect-ratio: 3/5) {
+  .is-general .experience-slide[data-theme="fu"] { --u: min(2.75cqw, 1.4cqh); }
+  .is-general .sc-dos7 { grid-template-rows: 7.2em auto 1.6em auto 1.4em minmax(0, 1fr) 10em; }
+  .is-general .d7-invite { bottom: 12.5em; }
+}

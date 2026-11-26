@@ -99,3 +99,5 @@
 @container rw (min-aspect-ratio: 1/1) {
   .sc-htc-2 .h2-route--p { display: none; }
 }
+
+@container rw (min-aspect-ratio: 1/1) { .is-general .sc-htc-2 .h2-col { left: max(62em, 55%); width: min(33em, 40%); } }

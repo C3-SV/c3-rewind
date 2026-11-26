@@ -14,7 +14,7 @@ const TICKS = Array.from({ length: 36 }, (_, i) => i);
 const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
 export function Htc1Scene() {
-  const { slide, showDraft } = useScene();
+  const { slide, edition, showDraft, recipient } = useScene();
   const facts = useFacts();
   const stats = slide.blocks.flatMap((block) => (block.type === "stat" && visibleStatus(block.status, showDraft) ? [block] : []));
   const hoursFact = facts.find((fact) => fact.icon === "clock" && /\d+/.test(fact.text));
@@ -80,6 +80,11 @@ export function Htc1Scene() {
           <Photo slot="htc3" label="la propuesta" tone="htc" clean className="h1-ph" />
           <figcaption className="h1-lab"><i>03</i>Propuesta</figcaption>
         </figure>
+
+        {!recipient && edition === "2026" && <div className="h1-extra" aria-label="Más fotos del Hackathon">
+          <Photo slot="htc4" label="foto del evento" tone="htc" className="h1-extra__photo" />
+          <Photo slot="htc5" label="foto del evento" tone="htc" className="h1-extra__photo" />
+        </div>}
 
         <Route className="h1-route h1-route--l" vb="0 0 100 56.25" d={D_LAND} start={[46, 17.7]} />
         <Route className="h1-route h1-route--p" vb="0 0 36.36 30" d={D_PORT} start={[1.6, 26]} />
