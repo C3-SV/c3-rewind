@@ -121,5 +121,7 @@
 .is-general .experience-stage { width: 100vw; height: 100dvh; aspect-ratio: auto; }
 @container rw (min-aspect-ratio: 1/1) {
   .is-general .experience-slide { --u: min(1cqw, 1.7778cqh); }
-  .is-general .rw-fg { left: 0; right: 0; width: min(100%, 177.78cqh); margin-inline: auto; }
+  .is-general .rw-hud, .is-general .rw-nav, .is-general .rw-notes-btn, .is-general .dev-ribbon, .is-general .editorial-notes { --hud-u: min(1cqw, 1.7778cqh); }
+  .is-general .oc__sys { width: calc(var(--sd) * min(1cqw, 1.7778cqh)); }
+  .is-general .oc[data-slide="portada"] .oc__sys { --sd: 44; }
 }

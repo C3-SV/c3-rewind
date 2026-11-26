@@ -141,3 +141,5 @@
 @keyframes cn-grow { from { transform: scaleY(0); } }
 @keyframes cn-tick { from { transform: scaleX(0); } }
 @media (hover: none) { .cn-sp:hover .cn-cap { transform: none; } }
+
+@container rw (max-aspect-ratio: 1/1) { .is-general .cn-tag { top: 12em; } }

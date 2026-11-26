@@ -32,7 +32,7 @@ const TILES = Array.from({ length: 36 }, (_, i) => {
 });
 
 export function Somos36Scene() {
-  const { slide, photos, imageKitEndpoint, showDraft } = useScene();
+  const { slide, photos, imageKitEndpoint, showDraft, staticMode, recipient } = useScene();
   const media = photos.grupo;
   const real = media && (showDraft || media.status === "approved") ? media : undefined;
   const src = real ? resolveMediaSource(real, imageKitEndpoint) : null;
@@ -47,6 +47,7 @@ export function Somos36Scene() {
       <div className="sm-back" aria-hidden="true" />
 
       <div className="sm-photo" style={mosStyle} {...(src && real ? { role: "img", "aria-label": real.alt } : { "aria-hidden": true })}>
+        {src && !staticMode && !recipient && <img className="sm-fill" src={src} alt="" style={{ objectPosition }} />}
         <div className="sm-whole">{src && <img src={src} alt="" style={{ objectPosition }} />}</div>
         <div className="sm-mos" data-slot="grupo">
           {TILES.map((t) => (

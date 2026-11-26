@@ -92,3 +92,5 @@
   .sc-portada .pt-fr { margin-right: 1.2em; }
   .sc-portada .pt-ctl { right: 1.6em; bottom: auto; top: 2.8em; }
 }
+
+@container rw (min-aspect-ratio: 1/1) { .is-general .sc-portada .pt-ring { width: 52em; } }

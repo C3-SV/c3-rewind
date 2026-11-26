@@ -11,7 +11,7 @@ export function OrbitField({ slideId, isStatic = false }: { slideId: string; isS
     "--px": pose.port.x, "--py": pose.port.y, "--pd": pose.port.d, "--po": pose.port.o,
   } as CSSProperties;
   return (
-    <div className={`oc${isStatic ? " oc--static" : ""}`} data-acc={pose.acc} style={style} aria-hidden="true">
+    <div className={`oc${isStatic ? " oc--static" : ""}`} data-acc={pose.acc} data-slide={slideId} style={style} aria-hidden="true">
       <div className="oc__sys"><OrbitSymbol logo={pose.logo} /></div>
     </div>
   );

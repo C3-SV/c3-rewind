@@ -64,3 +64,9 @@
   .sc-somos36 .sm-n { font-size: 15em; translate: 0 .08em; }
   .sc-somos36 .sm-ring { width: 22em; margin: -11em 0 0 -9em; }
 }
+
+/* The same uncropped picture is used by the assembled image and its animated tiles. */
+.sm-fill { display: none; }
+.is-general .sc-somos36 .sm-fill { display: block; position: absolute; inset: -3%; width: 106%; height: 106%; object-fit: cover; filter: blur(1.2em) brightness(.5); }
+.is-general .sc-somos36[data-real] .sm-whole, .is-general .sc-somos36[data-real] .sm-t { background-color: transparent; }
+.is-general .sc-somos36[data-real] .sm-whole > img, .is-general .sc-somos36[data-real] .sm-t > img { object-fit: contain; object-position: center 25% !important; }
