@@ -5,7 +5,6 @@ import type { CSSProperties } from "react";
 import { Counter, Icon, Lines } from "../primitives.tsx";
 import { useScene } from "../scene-context.tsx";
 import { resolveMediaSource } from "../../../lib/media.ts";
-import { OrbitSymbol } from "../../motion/orbit-field.tsx";
 import { PICTURE_L, PICTURE_P } from "./somos36-art.tsx";
 
 /* ------------------------------------------------------------------ *
@@ -31,8 +30,6 @@ const TILES = Array.from({ length: 36 }, (_, i) => {
     diag: r + c,
   };
 });
-
-const POSE = { "--lx": 93, "--ly": 12, "--ld": 24, "--lo": 0.75, "--px": 86, "--py": 9, "--pd": 56, "--po": 0.6 } as CSSProperties;
 
 export function Somos36Scene() {
   const { slide, photos, imageKitEndpoint, showDraft } = useScene();
@@ -65,10 +62,6 @@ export function Somos36Scene() {
         <div className="sm-sweep" />
       </div>
       <div className="sm-veil" aria-hidden="true" />
-
-      <div className="oc sm-oc" data-acc="none" aria-hidden="true" style={POSE}>
-        <div className="oc__sys"><OrbitSymbol /></div>
-      </div>
 
       <div className="sm-copy">
       <div className="sm-who">

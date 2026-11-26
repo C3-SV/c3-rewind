@@ -20,13 +20,11 @@
 .sc-somos36 .sm-veil { position: absolute; left: 0; right: 0; bottom: 0; height: 62%; z-index: 2; pointer-events: none;
   background: linear-gradient(0deg, rgba(12,24,48,.96) 0%, rgba(12,24,48,.88) 24%, rgba(12,24,48,.5) 56%, rgba(12,24,48,0) 100%); }
 
-.sc-somos36 .sm-oc { z-index: 4; }
-
 /* ---------- copy ---------- */
 .sc-somos36 .sm-copy { position: absolute; z-index: 5; left: 3.4em; right: 16em; bottom: 5.4em; display: flex; align-items: flex-end; gap: 5.5em; }
 .sc-somos36 .sm-who { position: relative; flex: none; }
 .sc-somos36 .sm-kick { display: flex; align-items: center; gap: .6em; color: var(--crea-t); margin: 0 0 1.1em .5em; font-size: 1.1em; }
-.sc-somos36 .sm-n { position: relative; font: 900 22em/.76 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.06em; color: #fff; font-variant-numeric: tabular-nums; min-width: 1.28em; text-shadow: 0 .02em .5em rgba(7,16,34,.35); }
+.sc-somos36 .sm-n { position: relative; translate: 0 .05em; font: 900 22em/.76 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: -.06em; color: #fff; font-variant-numeric: tabular-nums; min-width: 1.28em; text-shadow: 0 .02em .5em rgba(7,16,34,.35); }
 .sc-somos36 .sm-ring { position: absolute; left: 50%; top: 56%; width: 30em; aspect-ratio: 1; margin: -15em 0 0 -12em; border-radius: 50%; border: .12em solid var(--crea-t); opacity: 0; pointer-events: none; }
 
 .sc-somos36 .sm-tx { flex: 0 1 44em; padding-bottom: .1em; }
@@ -63,6 +61,6 @@
   .sc-somos36 .sm-tx { flex: none; width: 100%; }
   .sc-somos36 .sm-h { font-size: 2.15em; line-height: 1.1; }
   .sc-somos36 .sm-p { font-size: clamp(13px, 1.2em, 18px); margin-top: .7em; line-height: 1.5; max-width: none; }
-  .sc-somos36 .sm-n { font-size: 15em; }
+  .sc-somos36 .sm-n { font-size: 15em; translate: 0 .08em; }
   .sc-somos36 .sm-ring { width: 22em; margin: -11em 0 0 -9em; }
 }
