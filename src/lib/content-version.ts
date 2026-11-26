@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 
 export function contentVersionFor(edition: unknown, recipient?: unknown): string {
+  // shortcut: JSON hashes omit media/style bytes; include asset hashes when those changes must expire PDFs automatically.
   const privateContent = recipient && typeof recipient === "object"
     ? Object.fromEntries(Object.entries(recipient).filter(([key]) => key !== "tokenHash" && key !== "active"))
     : recipient ?? null;

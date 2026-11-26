@@ -66,12 +66,12 @@ export function Somos36Scene() {
       <div className="sm-copy">
       <div className="sm-who">
         <p className="kicker sm-kick"><Icon name="users" />Somos</p>
-        <p className="sm-n"><Counter to={36} delay={4600} duration={1500} /></p>
+        <p className="sm-n"><Counter to={36} delay={1700} duration={900} /></p>
         <i className="sm-ring" aria-hidden="true" />
       </div>
 
       <div className="sm-tx">
-        <h1 className="sm-h"><Lines lines={parts} delay={5.0} step={0.16} /></h1>
+        <h1 className="sm-h"><Lines lines={parts} delay={1.8} step={0.12} /></h1>
         {body && <p className="sm-p rv">{body}</p>}
       </div>
       </div>

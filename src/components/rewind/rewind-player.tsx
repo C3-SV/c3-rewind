@@ -51,12 +51,13 @@ export function RewindPlayer({ slides, edition, photos, imageKitEndpoint, recipi
     <main className={`rewind-app is-live${p.paused || p.reducedMotion ? " is-paused" : ""}${fullscreen ? " is-fullscreen" : ""}`}>
       <div
         ref={stageRef}
-        className={`experience-stage${p.reducedMotion ? " reduce-motion" : ""}`}
+        className={`experience-stage${p.reducedMotion || p.paused ? " reduce-motion" : ""}`}
         onTouchStart={p.onTouchStart}
         onTouchEnd={(event) => p.onTouchEnd(event, stageRef.current)}
         aria-roledescription="presentación"
       >
         {slides.map((slide, index) => {
+          if (Math.abs(index - p.activeIndex) > 1 && index !== p.transition.leaving) return null;
           const isActive = index === p.activeIndex;
           const entering = isActive && p.transition.leaving !== null;
           const cls = [isActive ? "is-active" : "", entering ? "top reveal" : "", index === p.transition.leaving ? "leaving out" : ""].filter(Boolean).join(" ");
@@ -73,7 +74,7 @@ export function RewindPlayer({ slides, edition, photos, imageKitEndpoint, recipi
               hidePdf={isReviewPreview}
               pdfHref={pdfHref}
               active={isActive}
-              reducedMotion={p.reducedMotion}
+              reducedMotion={p.reducedMotion || p.paused}
               className={cls}
               label={`${index + 1} de ${slides.length}: ${slide.title}`}
               hidden={!isActive}
@@ -83,7 +84,7 @@ export function RewindPlayer({ slides, edition, photos, imageKitEndpoint, recipi
             />
           );
         })}
-        <OrbitFieldHost slideId={active?.id ?? "portada"} />
+        <OrbitField slideId={active?.id ?? "portada"} />
         <Navigation
           slides={slides}
           activeIndex={p.activeIndex}
@@ -104,8 +105,4 @@ export function RewindPlayer({ slides, edition, photos, imageKitEndpoint, recipi
       <span className="sr-only" aria-live="polite">{active ? `Slide ${p.activeIndex + 1}: ${active.title}` : ""}</span>
     </main>
   );
-}
-
-function OrbitFieldHost({ slideId }: { slideId: string }) {
-  return <OrbitField slideId={slideId} />;
 }

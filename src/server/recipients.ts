@@ -1,19 +1,20 @@
 import "server-only";
-import recipientsJson from "./private/recipients.json" with { type: "json" };
-import { RecipientListSchema, type RecipientRecord } from "./recipient-schema.ts";
+import type { RecipientRecord } from "./recipient-schema.ts";
+import { readRecipientRecords } from "./recipient-store.ts";
 import { isRecipientPublishable, resolveRecipient } from "./recipient-resolution.ts";
-export { isRecipientPublishable, resolveRecipient } from "./recipient-resolution.ts";
+import { getEdition, isEditionPublishable } from "../content/editions.ts";
 export type { RecipientRecord } from "./recipient-schema.ts";
-const recipientRecords: RecipientRecord[] = RecipientListSchema.parse(recipientsJson);
 
 export function findRecipientById(id: string, edition: number): RecipientRecord | null {
-  return recipientRecords.find((record) => record.id === id && record.edition === edition) ?? null;
-}
-
-export function listApprovedRecipients(edition: number): RecipientRecord[] {
-  return recipientRecords.filter((record) => record.edition === edition && record.status === "published" && record.active && record.tokenHash);
+  return readRecipientRecords().find((record) => record.id === id && record.edition === edition) ?? null;
 }
 
 export function getRecipientForRequest(edition: string, token: string): RecipientRecord | null {
-  return resolveRecipient(recipientRecords, edition, token);
+  const recipient = resolveRecipient(readRecipientRecords(), edition, token);
+  if (!recipient || process.env.NODE_ENV !== "production") return recipient;
+  try {
+    return isRecipientPublishable(recipient) && isEditionPublishable(getEdition(edition), "private") ? recipient : null;
+  } catch {
+    return null;
+  }
 }

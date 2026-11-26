@@ -34,17 +34,6 @@
   --out: cubic-bezier(.16, 1, .3, 1);
   --spring: cubic-bezier(.2, .9, .25, 1.12);
   --soft-out: cubic-bezier(.22, .8, .24, 1);
-  /* legacy aliases used by older modules */
-  --compite-light: var(--compite-l);
-  --crea-light: var(--crea-t);
-  --conecta-light: var(--conecta-l);
-  --copa: var(--copa-p);
-  --copa-light: var(--copa-pl);
-  --htc: var(--htc-o);
-  --htc-navy: var(--htc-b);
-  --focus: var(--foco);
-  --ease-rewind: var(--ease);
-  --ease-out-rewind: var(--out);
 }
 
 *, *::before, *::after { box-sizing: border-box; }

@@ -32,18 +32,18 @@
 .sc-somos36 .sm-p { font: 400 1.3em/1.55 var(--font-poppins, Poppins), sans-serif; color: #e6edf8; margin-top: .8em; max-width: 30em; text-shadow: 0 .05em .8em rgba(7,16,34,.6); }
 
 /* ---------- motion ---------- */
-.is-active .sc-somos36 .sm-whole { animation: rw-fade .5s ease 4.55s backwards; }
-.is-active .sc-somos36 .sm-mos { animation: sm-gap 1.7s var(--ease) 3.1s backwards; }
-.is-active .sc-somos36 .sm-t { animation: sm-in 1.35s var(--spring) calc(.15s + var(--o) * .042s) backwards; }
-.is-active .sc-somos36 .sm-t::before { animation: sm-tint 1.1s ease calc(2.35s + var(--diag) * .07s) backwards; }
-.is-active .sc-somos36 .sm-sweep { animation: sm-sweep 1.9s var(--ease) 3.9s backwards; }
-.is-active .sc-somos36 .sm-sweep::before { animation: sm-band 1.9s var(--ease) 3.9s backwards; }
-.is-active .sc-somos36 .sm-veil { animation: rw-fade 1.3s ease 4.1s backwards; }
-.is-active .sc-somos36 .sm-photo { animation: sm-kb 26s ease-in-out 5s infinite alternate; }
-.is-active .sc-somos36 .sm-kick { animation: rw-rise 1s var(--out) 4.4s backwards; }
-.is-active .sc-somos36 .sm-n { animation: sm-land 1.3s var(--spring) 4.5s backwards; }
-.is-active .sc-somos36 .sm-ring { animation: sm-pulse 2.4s var(--out) 4.9s backwards; }
-.is-active .sc-somos36 .sm-p { --d: 5.5s; }
+.is-active .sc-somos36 .sm-whole { animation: rw-fade .4s ease 2s backwards; }
+.is-active .sc-somos36 .sm-mos { animation: sm-gap .85s var(--ease) 1.4s backwards; }
+.is-active .sc-somos36 .sm-t { animation: sm-in .8s var(--spring) calc(.1s + var(--o) * .02s) backwards; }
+.is-active .sc-somos36 .sm-t::before { animation: sm-tint .6s ease calc(1.05s + var(--diag) * .035s) backwards; }
+.is-active .sc-somos36 .sm-sweep { animation: sm-sweep 1s var(--ease) 1.8s backwards; }
+.is-active .sc-somos36 .sm-sweep::before { animation: sm-band 1s var(--ease) 1.8s backwards; }
+.is-active .sc-somos36 .sm-veil { animation: rw-fade .7s ease 1.6s backwards; }
+.is-active .sc-somos36 .sm-photo { animation: sm-kb 26s ease-in-out 2.3s infinite alternate; }
+.is-active .sc-somos36 .sm-kick { animation: rw-rise .7s var(--out) 1.6s backwards; }
+.is-active .sc-somos36 .sm-n { animation: sm-land .7s var(--spring) 1.7s backwards; }
+.is-active .sc-somos36 .sm-ring { animation: sm-pulse 1.2s var(--out) 2s backwards; }
+.is-active .sc-somos36 .sm-p { --d: 2s; }
 @keyframes sm-in { from { opacity: 0; transform: translate(var(--rx), var(--ry)) rotate(var(--rot)) scale(.26); } }
 @keyframes sm-gap { from { --gap: 1.1em; --rad: 1.5em; } }
 @keyframes sm-tint { from { opacity: 1; } }

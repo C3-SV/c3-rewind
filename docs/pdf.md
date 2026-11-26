@@ -2,6 +2,8 @@
 
 Los documentos tienen una página horizontal 16:9 por slide activa, fondos preservados y diseño de impresión sin controles. Playwright genera los archivos en local y la ruta protegida solo entrega el archivo cuya versión coincide con el hash del contenido y destinatario actual.
 
+La exportación usa la previsualización local con `?export=1`, que rechaza contenido no aprobado y excluye los datos de borrador antes de renderizar. Espera las fuentes y la decodificación de todas las imágenes; una imagen rota cancela la generación. `pdf:all` procesa las empresas aprobadas de esa edición. El hash cubre los JSON de contenido y ficha; al reemplazar un archivo de imagen o modificar estilos, regenerar los PDFs aunque el JSON no cambie.
+
 1. Completa la ficha y medios aprobados.
 2. Arranca `npm run dev`.
 3. Ejecuta `npm run pdf:general -- --edition 2026`, `npm run pdf:recipient -- --edition 2026 <id>`, `npm run pdf:all -- --edition 2026` o `npm run pdf:edition -- 2026`.

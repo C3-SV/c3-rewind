@@ -5,20 +5,11 @@ import type { CSSProperties, ReactNode } from "react";
 import { OC, polar } from "../../motion/orbit-geometry.ts";
 import { Icon, LineChip, monogram } from "../primitives.tsx";
 import { useScene } from "../scene-context.tsx";
+import { splitClosingMessage } from "../../../lib/closing-message.ts";
 
 const SAFE_DEST = /^(?:https:\/\/|mailto:)\S+$/;
 const SITE = "https://c3.com.sv";
 const INSTAGRAM = "https://www.instagram.com/c3.elsalvador";
-const SIGNATURE = "Nos vemos en 2027.";
-
-/** Message → warm paragraph + a closing signature line ("Nos vemos en 2027." is always kept). */
-function splitMessage(raw: string): { body: string; sign: string } {
-  const parts = (raw.trim().match(/[^.!?]+[.!?]+(?:\s+|$)/g) ?? [raw.trim()]).map((s) => s.trim()).filter(Boolean);
-  const last = parts[parts.length - 1] ?? "";
-  if (/^nos vemos/i.test(last)) return { body: parts.slice(0, -1).join(" "), sign: last };
-  return { body: parts.join(" "), sign: SIGNATURE };
-}
-
 const BLUE = polar(OC.rOrbit, -OC.nodeAngle);
 const PURPLE = polar(OC.rOrbit, OC.nodeAngle);
 const END_A = polar(130, 30);
@@ -69,7 +60,7 @@ function emphasizeYear(title: string): ReactNode[] {
 
 export function CierreScene() {
   const { slide, recipient, partnerLogo, pdfHref, hidePdf, home } = useScene();
-  const { body, sign } = splitMessage(recipient?.closingMessage?.trim() || slide.body || "");
+  const { body, sign } = splitClosingMessage(recipient?.closingMessage?.trim() || slide.body || "");
   const dest = recipient ? (recipient.contactDestination && SAFE_DEST.test(recipient.contactDestination) ? recipient.contactDestination : null) : SITE;
   const label = recipient ? "Conversemos" : "Visitar c3.com.sv";
   const external = dest?.startsWith("https://");

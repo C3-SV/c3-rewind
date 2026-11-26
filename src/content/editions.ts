@@ -43,13 +43,34 @@ export function resolveSlides(
   );
 }
 
-export function isEditionPublishable(edition: Edition): boolean {
+export function isEditionPublishable(edition: Edition, view: EditionView = "general"): boolean {
   if (edition.publicationStatus !== "approved") return false;
-  const publicSlides = edition.slides.filter((slide) => slide.enabled && slide.audience !== "private");
-  return publicSlides.length === 13 && publicSlides.every((slide) => {
+  const publicSlides = edition.slides.filter((slide) => slide.enabled && slide.audience !== (view === "general" ? "private" : "general"));
+  return publicSlides.length === (view === "general" ? 13 : 14) && publicSlides.every((slide) => {
     const blocksApproved = slide.blocks.every(isBlockApproved);
-    return slide.status === "approved" && blocksApproved;
+    return slide.status === "approved" && blocksApproved && slide.facts.every((fact) => fact.status === "approved");
   });
+}
+
+/** Filter before crossing the server/client boundary; hiding content in a scene is too late. */
+export function presentationContent(edition: Edition, view: EditionView, showDraft = false): Edition {
+  const mediaAllowed = (media: Edition["photos"][string]) => (view === "private" || !media.private) && (showDraft || media.status === "approved");
+  return {
+    ...edition,
+    photos: Object.fromEntries(Object.entries(edition.photos).filter(([, media]) => mediaAllowed(media))),
+    slides: edition.slides.filter((slide) => slide.enabled && slide.audience !== (view === "general" ? "private" : "general") && (showDraft || slide.status === "approved")).map((slide) => ({
+      ...slide,
+      editorialNotes: showDraft ? slide.editorialNotes : [],
+      facts: slide.facts.filter((fact) => showDraft || fact.status === "approved"),
+      blocks: slide.blocks.flatMap((block): ContentBlock[] => {
+        if (block.type === "image") return mediaAllowed(block.media) ? [block] : [];
+        if (!showDraft && block.status !== "approved") return [];
+        if (block.type !== "gallery") return [block];
+        const media = block.media.filter(mediaAllowed);
+        return media.length ? [{ ...block, media }] : [];
+      }),
+    })),
+  };
 }
 
 function isBlockApproved(block: ContentBlock): boolean {

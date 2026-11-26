@@ -4,7 +4,7 @@
 
 Next.js App Router resuelve rutas y contenido en el servidor. `src/components/rewind` maneja estado de navegación y URL; `src/components/slides` traduce contenido tipado a escenas; `src/components/motion` mantiene el motivo de órbitas; `src/components/ui` contiene los controles. El CSS conserva las composiciones específicas del HTML y agrega tokens compartidos y adaptaciones, sin framework de utilidades.
 
-La navegación se apoya en IDs estables de slide (`portada`, `gracias`, `etapa`, `cifras`, `copa-col`, `copa-uni`, `htc-1`, `htc-2`, `conecta`, `huella`, `somos36`, `voces`, `dos7`, `cierre`). Los JSON controlan orden, activación y contenido. `huella` es privada y el resolver produce 13 slides generales o 14 privadas. El bloque `gallery` implementa navegación manual accesible en pantalla y representa todas las imágenes aprobadas en el render estático/PDF.
+La navegación se apoya en IDs estables de slide (`portada`, `gracias`, `etapa`, `cifras`, `copa-col`, `copa-uni`, `htc-1`, `htc-2`, `conecta`, `huella`, `somos36`, `voces`, `dos7`, `cierre`). Los JSON controlan orden, activación y contenido. `huella` es privada y el resolver produce 13 slides generales o 14 privadas. Las escenas consumen los slots de `photos` y la evidencia de la ficha empresarial. El esquema admite `gallery`, pero las escenas actuales no implementan una galería genérica. El reproductor monta la escena actual, sus vecinas y la saliente; el render estático mantiene todas las páginas.
 
 ## Datos y límites de confianza
 

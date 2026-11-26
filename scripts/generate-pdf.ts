@@ -1,11 +1,13 @@
 import { chromium } from "playwright";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import nextEnv from "@next/env";
 import { getEdition, isEditionPublishable, resolveSlides } from "../src/content/editions.ts";
 import { contentVersionFor } from "../src/lib/content-version.ts";
-import { RecipientListSchema } from "../src/server/recipient-schema.ts";
+import { readRecipientRecords } from "../src/server/recipient-store.ts";
 import { isRecipientPublishable } from "../src/server/recipient-resolution.ts";
 
+nextEnv.loadEnvConfig(process.cwd(), true);
 const args = process.argv.slice(2);
 const mode = args.find((arg) => ["--general", "--recipient", "--all", "--edition"].includes(arg));
 const editionIndex = args.indexOf("--edition");
@@ -14,11 +16,12 @@ const recipientId = mode === "--recipient" ? args.find((arg, index) => !arg.star
 const baseUrl = process.env.REWIND_PDF_BASE_URL ?? "http://localhost:3000";
 const edition = getEdition(year);
 const outputDirectory = resolve("private/pdfs");
-const recipients = RecipientListSchema.parse(JSON.parse(await readFile(resolve("src/server/private/recipients.json"), "utf8")));
+const recipients = readRecipientRecords();
 const readyRecipients = recipients.filter((recipient) => recipient.edition === edition.year && isRecipientPublishable(recipient));
 
 if (!mode) throw new Error("Use --general, --recipient <id>, --all, or --edition <year>.");
-if ((mode === "--general" || mode === "--edition") && !isEditionPublishable(edition)) throw new Error("General edition is not approved for publication.");
+const view = mode === "--general" || mode === "--edition" ? "general" : "private";
+if (!isEditionPublishable(edition, view)) throw new Error("Edition is not approved for publication.");
 
 const targets = mode === "--general" || mode === "--edition"
   ? [{ id: "general", url: `${baseUrl}/dev/preview/${year}/general`, version: contentVersionFor(edition), count: resolveSlides(year, "general").length }]
@@ -31,14 +34,20 @@ const targets = mode === "--general" || mode === "--edition"
     })()]
     : readyRecipients.map((recipient) => ({ id: recipient.id, url: `${baseUrl}/dev/preview/${year}/${recipient.id}`, version: contentVersionFor(edition, recipient), count: resolveSlides(year, "private").length }));
 
+if (!targets.length) throw new Error("No approved recipients are available for PDF generation.");
 await mkdir(outputDirectory, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 try {
   for (const target of targets) {
     const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
-    await page.goto(target.url, { waitUntil: "domcontentloaded" });
+    const response = await page.goto(`${target.url}?export=1`, { waitUntil: "domcontentloaded" });
+    if (!response?.ok()) throw new Error(`${target.id}: export preview is unavailable.`);
     await page.emulateMedia({ media: "print" });
-    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(async () => {
+      for (const image of document.images) image.loading = "eager";
+      await document.fonts.ready;
+      await Promise.all(Array.from(document.images, (image) => image.decode()));
+    });
     const renderedCount = await page.locator(".experience-slide").count();
     if (renderedCount !== target.count) throw new Error(`${target.id}: expected ${target.count} slides, rendered ${renderedCount}.`);
     const filename = `${edition.year}-${target.id}`;

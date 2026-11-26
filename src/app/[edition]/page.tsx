@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RewindPlayer } from "../../components/rewind/rewind-player.tsx";
-import { getEdition, getGeneralExperienceMode, isEditionPublishable, resolveSlides } from "../../content/editions.ts";
+import { getEdition, getGeneralExperienceMode, isEditionPublishable, presentationContent } from "../../content/editions.ts";
 import { env } from "../../server/env.ts";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +39,6 @@ export default async function EditionPage({ params }: { params: Promise<Params> 
     preview: env.REWIND_GENERAL_PREVIEW === "true" && year === env.REWIND_LATEST_EDITION,
   });
   if (mode === "blocked") notFound();
-
-  return <RewindPlayer slides={resolveSlides(year, "general")} photos={edition.photos} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={process.env.NODE_ENV !== "production"} isReviewPreview={mode === "review" && process.env.NODE_ENV === "production"} />;
+  const content = presentationContent(edition, "general", mode === "review");
+  return <RewindPlayer slides={content.slides} photos={content.photos} edition={year} imageKitEndpoint={env.IMAGEKIT_URL_ENDPOINT || undefined} isDevelopment={mode === "review" && process.env.NODE_ENV !== "production"} isReviewPreview={mode === "review" && process.env.NODE_ENV === "production"} />;
 }

@@ -51,8 +51,8 @@ Los comandos de token guardan solo el hash; muestran el secreto una vez en termi
 ## Contenido y empresas
 
 - Ediciones y narrativa: `src/content/{año}/` (JSON validado por Zod).
-- Fichas privadas: `src/server/private/recipients.json`; no mover a `public/` ni importar desde componentes cliente.
-- Imágenes locales privadas: `private/media/{id}/`; no usar una URL pública para evidencia privada.
+- Fichas privadas: configurar `REWIND_RECIPIENTS_FILE` con un archivo ignorado como `src/server/private/recipients.local.json`. El catálogo versionado solo conserva borradores vacíos. Ver [configuración por empresa](docs/company-configuration.md).
+- Imágenes locales privadas: `private/media/{año}/{id}/`; no usar una URL pública para evidencia privada.
 - Logos oficiales: `public/brand/`.
 - Estados editoriales: `pending`, `preliminary`, `validated`, `approved`.
 
@@ -60,4 +60,4 @@ Guía operativa: [estado de implementación](docs/implementation-status.md), [va
 
 ## Referencias
 
-El HTML de referencia se conserva sin cambios en `references/C3 Rewind 2026.html`; la hoja visual original extraída vive en `src/styles/rewind.css`. El guion editorial v3 tuvo prioridad para narrativa y datos, y el HTML más reciente para dirección visual. Los materiales de referencia no se sirven como rutas del sitio.
+El HTML de referencia se conserva sin cambios en `references/C3 Rewind 2026.html`; los estilos actuales viven en `src/styles/` y en las hojas de cada escena. El guion editorial v3 tuvo prioridad para narrativa y datos, y el HTML más reciente para dirección visual. Los materiales de referencia no se sirven como rutas del sitio.

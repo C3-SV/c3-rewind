@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import Image from "next/image";
 import { resolveMediaSource } from "../../lib/media.ts";
 import { useScene, useFacts } from "./scene-context.tsx";
 
@@ -85,7 +86,7 @@ export type Tone = "navy" | "compite" | "crea" | "conecta" | "copa" | "htc";
 export function Photo({ slot, label, tone = "navy", circle = false, small = false, clean = false, className = "", style, children }: {
   slot: string; label?: string; tone?: Tone; circle?: boolean; small?: boolean; clean?: boolean; className?: string; style?: CSSProperties; children?: ReactNode;
 }) {
-  const { photos, imageKitEndpoint, showDraft } = useScene();
+  const { photos, imageKitEndpoint, showDraft, staticMode } = useScene();
   const media = photos[slot];
   const real = media && (showDraft || media.status === "approved") ? media : undefined;
   const id = `g${slot.replace(/[^a-z0-9]/gi, "")}`;
@@ -105,7 +106,7 @@ export function Photo({ slot, label, tone = "navy", circle = false, small = fals
           <circle cx="300" cy="120" r="9" fill="#fff" fillOpacity=".5" />
         </svg>
       </div>
-      {real && <img src={resolveMediaSource(real, imageKitEndpoint)} alt={real.alt} loading="lazy" style={{ objectPosition: real.focalPoint ? `${real.focalPoint.x}% ${real.focalPoint.y}%` : undefined }} />}
+      {real && <Image src={resolveMediaSource(real, imageKitEndpoint)} alt={real.alt} fill sizes={small ? "(max-width: 720px) 28vw, 16vw" : "(max-width: 720px) 80vw, 50vw"} loading="eager" unoptimized={staticMode || real.private || real.provider !== "local" || !real.src.startsWith("/photos/")} style={{ objectFit: "cover", objectPosition: real.focalPoint ? `${real.focalPoint.x}% ${real.focalPoint.y}%` : undefined }} />}
       {!real && <span className="ph__tag"><Icon name="cam" /><span className="l">FOTO PENDIENTE{label ? ` · ${label}` : ""}</span></span>}
       {children}
     </div>

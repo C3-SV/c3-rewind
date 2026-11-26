@@ -3,12 +3,11 @@
 .rewind-app.is-static { position: static; display: block; overflow: visible; min-height: 100svh; padding: 1.2rem 0 3rem; }
 
 .experience-stage { position: relative; width: min(100vw, calc(100dvh * 16 / 9)); aspect-ratio: 16 / 9; container: rw / size; overflow: hidden; background: var(--navy-d); isolation: isolate; touch-action: pan-y; }
-@media (max-aspect-ratio: 1/1), (max-width: 720px) { .experience-stage { width: 100vw; height: 100dvh; aspect-ratio: auto; } }
+@media (max-aspect-ratio: 1/1) { .experience-stage { width: 100vw; height: 100dvh; aspect-ratio: auto; } }
 
 /* Every slide scales from one unit: 1cqw landscape (16px at 1600) / larger in portrait. */
 .experience-slide { --u: 1cqw; --r: 200vmax; --cx: 50%; --cy: 50%; position: absolute; inset: 0; visibility: hidden; pointer-events: none; font-size: var(--u); }
 @container rw (max-aspect-ratio: 1/1) { .experience-slide { --u: 2.75cqw; } }
-@container rw (max-width: 720px) { .experience-slide { --u: 2.75cqw; } }
 .experience-slide.is-active, .experience-slide.leaving { visibility: visible; }
 .experience-slide.is-active { pointer-events: auto; }
 .rw-bg, .rw-fg { position: absolute; inset: 0; }
@@ -56,15 +55,13 @@
 .rw-chap { display: flex; flex-direction: column; gap: .35em; align-items: flex-start; --cc: #fff; }
 .rw-chap[data-ch=compite] { --cc: var(--compite-l); } .rw-chap[data-ch=crea] { --cc: var(--crea); } .rw-chap[data-ch=conecta] { --cc: var(--conecta-l); }
 .rw-segs { display: flex; gap: .15em; align-items: center; }
-.rw-seg { width: max(18px, 1.6em); height: max(22px, 1.6em); display: grid; place-items: center; }
+.rw-seg { width: max(24px, 1.6em); height: max(24px, 1.6em); display: grid; place-items: center; flex: none; }
 .rw-seg i { display: block; width: .75em; height: .75em; border-radius: 99px; background: rgba(255,255,255,.28); transition: width .55s var(--out), background .4s, box-shadow .4s; }
 .rw-seg.vis i { background: var(--c, var(--cc)); }
 .rw-seg.cur i { width: 2.8em; background: var(--c, var(--cc)); box-shadow: 0 0 1.2em var(--c, var(--cc)); }
 .rw-seg:hover i { background: #fff; }
 .rw-chap__n { font: 700 max(10px, .78em)/1 var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--cc); opacity: 0; transition: opacity .4s; margin-left: .3em; white-space: nowrap; min-height: 1em; padding: 0; }
 .rw-chap.on .rw-chap__n, .rw-chap:hover .rw-chap__n, .rw-chap__n:focus-visible { opacity: 1; }
-.rw-chap.pop .rw-segs { animation: rw-hudpop 1.2s var(--spring); }
-@keyframes rw-hudpop { 40% { transform: scale(1.3); } }
 .nav-count, .rw-meta { font: 700 max(10px, .9em) var(--font-montserrat, Montserrat), sans-serif; letter-spacing: .12em; color: var(--soft); padding-top: .8em; font-variant-numeric: tabular-nums; min-width: 5em; text-align: right; }
 
 .rw-nav { position: absolute; z-index: 20; right: calc(3em + env(safe-area-inset-right, 0px)); bottom: calc(2.4em + env(safe-area-inset-bottom, 0px)); display: flex; gap: .8em; align-items: center; font-size: var(--hud-u, 1cqw); }
@@ -88,11 +85,12 @@
 
 @container rw (max-aspect-ratio: 1/1) {
   .rw-hud { --hud-u: 2.75cqw; padding: calc(1.2em + env(safe-area-inset-top, 0px)) calc(1.6em + env(safe-area-inset-right, 0px)) 0 calc(1.6em + env(safe-area-inset-left, 0px)); }
-  .rw-nav { --hud-u: 2.75cqw; right: 50%; translate: 50% 0; bottom: calc(1.4em + env(safe-area-inset-bottom, 0px)); gap: 1em; }
+  .rw-nav { --hud-u: 2.75cqw; right: calc(1.6em + env(safe-area-inset-right, 0px)); bottom: calc(1.4em + env(safe-area-inset-bottom, 0px)); gap: .6em; }
   .nav-count, .rw-meta { display: none; }
   .rw-chap__n { position: absolute; width: 1px; height: 1px; min-height: 0; overflow: hidden; opacity: 0; margin: 0; }
-  .rw-chs { gap: .9em; }
-  .rw-nb--ghost { display: none; }
+  .rw-chs { flex: 1; min-width: 0; gap: .6em; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--conecta-l) transparent; }
+  .rw-chap { flex: none; }
+  .rw-nb--fullscreen { display: none; }
   .rw-notes-btn { --hud-u: 2.75cqw; left: 1.6em; bottom: calc(1.4em + env(safe-area-inset-bottom, 0px)); }
   .dev-ribbon { --hud-u: 2.75cqw; bottom: calc(5.6em + env(safe-area-inset-bottom, 0px)); }
   .editorial-notes { --hud-u: 2.75cqw; left: 1.2em; right: 1.2em; max-width: none; bottom: calc(8em + env(safe-area-inset-bottom, 0px)); }

@@ -15,6 +15,7 @@ const record: AccessControlledRecord = {
 test("only an active published hash resolves for the matching edition", () => {
   assert.equal(resolveRecipient([record], "2026", token)?.id, "example-partner");
   assert.equal(resolveRecipient([record], "2027", token), null);
+  assert.equal(resolveRecipient([record], "2026.0", token), null);
   assert.equal(resolveRecipient([record], "2026", "bad-token"), null);
 });
 

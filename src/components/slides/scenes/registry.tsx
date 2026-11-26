@@ -16,7 +16,7 @@ import { VocesScene } from "./voces.tsx";
 import { Dos7Scene } from "./dos7.tsx";
 import { CierreScene } from "./cierre.tsx";
 
-export type SceneDef = { Scene: ComponentType; theme: string; chapterAccent?: "compite" | "crea" | "conecta" };
+export type SceneDef = { Scene: ComponentType; theme: string };
 /** Slide id → bespoke scene. Backgrounds/themes are CSS ([data-theme]); scenes may also draw their own backdrop inside .story-scene. */
 export const SCENES: Record<string, SceneDef> = {
   "portada": { Scene: PortadaScene, theme: "p0" },

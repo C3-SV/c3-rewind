@@ -6,7 +6,7 @@
 2. Configurar el proyecto Vercel para Next.js y la rama aprobada.
 3. La vista pública de revisión se activa por defecto, está marcada como borrador y no se indexa. Cualquiera con el URL puede verla. Añadir `REWIND_GENERAL_PREVIEW=false` para volver a bloquear ediciones no aprobadas; para publicar una edición final, aprobar el contenido, poner `REWIND_GENERAL_PUBLISHED=true` y luego habilitar `REWIND_INDEX_GENERAL=true` solo si se desea indexarla.
 4. Añadir variables de producción desde `.env.example`: `REWIND_LATEST_EDITION`, `REWIND_SITE_ORIGIN`, `REWIND_GENERAL_PUBLISHED=false`, `REWIND_GENERAL_PREVIEW=true`, `REWIND_INDEX_GENERAL=false` y, cuando aplique, `IMAGEKIT_URL_ENDPOINT`.
-5. El repo es público: no agregar fichas reales, hashes activos, medios privados ni PDFs. El código actual solo contiene borradores vacíos; las rutas empresariales y de PDF siguen bloqueadas. Antes de activarlas, conectar un origen privado para su configuración y archivos.
+5. El repo es público: no agregar fichas reales, hashes activos, medios privados ni PDFs. El código actual solo contiene borradores vacíos; las rutas empresariales y de PDF siguen bloqueadas. `REWIND_RECIPIENTS_FILE` selecciona un archivo privado dentro del proyecto y fuera de `public/`; se traza para las funciones de página, PDF e imágenes. El archivo ignorado debe suministrarse por un canal privado al build y runtime. Aún no existe integración con un servicio que lo suministre. Ver [configuración por empresa](company-configuration.md).
 6. Los PDFs generados localmente quedan ignorados por Git y no llegan a Vercel. Revisar la estrategia de almacenamiento privado antes de habilitar la descarga.
 7. Confirmar build y pruebas antes de asignar el dominio.
 

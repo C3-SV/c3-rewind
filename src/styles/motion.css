@@ -28,6 +28,10 @@
 @keyframes rw-nudge { 50% { box-shadow: 0 0 0 .7em rgba(255, 255, 255, .16); } }
 
 /* Reduced motion (OS or manual toggle) and static/PDF: everything resolves to its final frame. */
+.experience-slide:not(.is-active):not(.leaving) *,
+.experience-slide:not(.is-active):not(.leaving) *::before,
+.experience-slide:not(.is-active):not(.leaving) *::after { animation-play-state: paused !important; }
+.is-paused *, .is-paused *::before, .is-paused *::after,
 .reduce-motion *, .reduce-motion *::before, .reduce-motion *::after,
 .is-static *, .is-static *::before, .is-static *::after { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) {

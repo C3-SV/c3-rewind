@@ -1,13 +1,8 @@
 import "server-only";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { Edition } from "../content/schema.ts";
-import { contentVersionFor } from "../lib/content-version.ts";
-import type { RecipientRecord } from "./recipients.ts";
 
 export { contentVersionFor as contentVersion } from "../lib/content-version.ts";
-
-export function currentContentVersion(edition: Edition, recipient?: RecipientRecord): string { return contentVersionFor(edition, recipient); }
 
 export async function readCurrentPdf(
   fileBase: string,

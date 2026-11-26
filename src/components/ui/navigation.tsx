@@ -33,7 +33,7 @@ export function Navigation({ slides, activeIndex, paused, reducedMotion, fullscr
   const click = (index: number) => (event: React.MouseEvent) => onGo(index, originOf(event));
   return (
     <>
-      <nav className={`rw-hud${activeIndex === 0 ? " off" : ""}`} aria-label="Progreso del recorrido">
+      <nav className={`rw-hud${activeIndex === 0 ? " off" : ""}`} inert={activeIndex === 0} aria-hidden={activeIndex === 0 || undefined} aria-label="Progreso del recorrido">
         <button className="rw-home nav-home" onClick={click(0)} aria-label="Volver al inicio"><img src="/brand/iso.png" alt="" /></button>
         <ol className="rw-chs" aria-label="Progreso por capítulos">
           {chapters.map((chapter) => {
@@ -58,7 +58,7 @@ export function Navigation({ slides, activeIndex, paused, reducedMotion, fullscr
       </nav>
 
       <div className="rw-nav">
-        <button className="rw-nb rw-nb--ghost" onClick={onFullscreen} aria-label={fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}><Icon name="full" /></button>
+        <button className="rw-nb rw-nb--ghost rw-nb--fullscreen" onClick={onFullscreen} aria-label={fullscreen ? "Salir de pantalla completa" : "Pantalla completa"}><Icon name="full" /></button>
         <button className="rw-nb rw-nb--ghost" onClick={onPause} aria-pressed={paused || reducedMotion} aria-label={paused || reducedMotion ? "Reanudar animaciones" : "Pausar animaciones"} disabled={reducedMotion}><Icon name={paused || reducedMotion ? "play" : "pause"} /></button>
         <button className="rw-nb" onClick={click(activeIndex - 1)} aria-label="Slide anterior" disabled={activeIndex === 0}><Icon name="back" /></button>
         <button className={`rw-nb rw-nb--next${nudgeNext ? " nudge" : ""}`} onClick={click(activeIndex + 1)} aria-label="Siguiente slide" disabled={activeIndex >= slides.length - 1}><Icon name="arrow" /></button>

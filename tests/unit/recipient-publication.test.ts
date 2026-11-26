@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { isRecipientContentApproved, isRecipientPublishable } from "../../src/server/recipient-resolution.ts";
+import { isRecipientContentApproved, isRecipientPublishable, recipientPresentation } from "../../src/server/recipient-resolution.ts";
 import type { RecipientRecord } from "../../src/server/recipients.ts";
 
 const approvedRecipient: RecipientRecord = {
@@ -22,4 +22,21 @@ test("a new access link can only be issued after the private story is editoriall
   assert.equal(isRecipientContentApproved({ ...approvedRecipient, tokenHash: null, active: false }), true);
   assert.equal(isRecipientContentApproved({ ...approvedRecipient, logo: null }), false);
   assert.equal(isRecipientContentApproved({ ...approvedRecipient, media: [{ file: "draft.webp", alt: "Pendiente", status: "pending" }] }), false);
+});
+
+test("empty messages and unmatched event claims cannot be published", () => {
+  assert.equal(isRecipientContentApproved({ ...approvedRecipient, welcomeMessage: " " }), false);
+  assert.equal(isRecipientContentApproved({ ...approvedRecipient, enabledByEvent: [{ eventId: "other", contribution: "mentors", description: "Mentoría." }] }), false);
+});
+
+test("the recipient payload excludes internal fields, draft evidence and unconsented testimonials", () => {
+  const presentation = recipientPresentation({ ...approvedRecipient,
+    impact: [{ label: "Draft", value: "Secret", status: "pending" }],
+    media: [...approvedRecipient.media, { file: "secret.webp", alt: "Private draft", status: "pending" }],
+    testimonials: [{ text: "Unconsented", person: "Private person", permission: false }],
+  });
+  for (const key of ["tokenHash", "active", "c3Owner", "officialName"]) assert.equal(key in presentation, false);
+  assert.deepEqual(presentation.impact, []);
+  assert.deepEqual(presentation.testimonials, []);
+  assert.equal(presentation.media.length, 1);
 });
